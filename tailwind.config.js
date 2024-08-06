@@ -5,8 +5,11 @@ module.exports = {
     extend: {
       colors: {
         bgColor: "#1a1a1a",
-        primary: "#058ED9",
-        secondary: "#BB3216",
+        primary: "#ef233c",
+        secondary: "#ef233c",
+      },
+      boxShadow: {
+        portfolioImage: "0px 0px 20px 5px rgba(239, 35, 60, 1)",
       },
     },
   },

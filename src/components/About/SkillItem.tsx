@@ -7,9 +7,9 @@ interface skillItemProps {
 
 export const SkillItem: React.FC<skillItemProps> = ({ text, imgLink }) => {
   return (
-    <div className="from-primary to-secondary h-36 w-40 rounded-xl bg-gradient-to-br p-1">
-      <div className="bg-bgColor flex h-full w-full flex-col items-center justify-center gap-y-2 rounded-xl">
-        <img className="rounded-xl" src={imgLink} width="80px" />
+    <div className="rounded-xl bg-gradient-to-r from-primary to-secondary p-1 xl:h-28 xl:w-32 2xl:h-36 2xl:w-40">
+      <div className="flex h-full w-full flex-col items-center justify-center gap-y-2 rounded-xl bg-bgColor">
+        <img className="rounded-xl xl:w-5/12 2xl:w-20" src={imgLink} />
         <span className="text-white">{text}</span>
       </div>
     </div>
