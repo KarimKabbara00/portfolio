@@ -6,9 +6,12 @@ interface propType {
 }
 
 export const PortfolioTechnology: React.FC<propType> = ({ tech, slash }) => {
+  const nbSpace = "\u00A0";
   return (
-    <div className="mr-3 pt-[0.1rem] font-mono text-primary">
-      {tech} {slash ? "|" : ""}
-    </div>
+    <span className="font-mono text-primary xl:text-lg 2xl:text-2xl">
+      {tech}
+      {slash && nbSpace}
+      {slash ? "|" + nbSpace : ""}
+    </span>
   );
 };

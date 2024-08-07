@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import { Title } from "../shared/Title";
 import { PortfolioItem } from "./PortfolioItem";
 import classicalPng from "../../portfolioImages/classicalLibrary.png";
@@ -16,28 +16,27 @@ export const Portfolio: React.FC<propTypes> = ({ portfolioInView, setPortfolioIn
   const targetRef = useRef<HTMLDivElement>(null);
 
   // show flag for hovering over portfolio images
-
-  const checkInView = () => {
-    if (targetRef.current) {
-      const rect = targetRef.current.getBoundingClientRect();
-      const windowHeight = window.innerHeight || document.documentElement.clientHeight;
-      const windowWidth = window.innerWidth || document.documentElement.clientWidth;
-      const inView = rect.top <= 75 && rect.left >= 0 && rect.bottom >= windowHeight && rect.right <= windowWidth;
-      setPortfolioInView(inView);
-    }
-  };
-
   useEffect(() => {
+    const checkInView = () => {
+      if (targetRef.current) {
+        const rect = targetRef.current.getBoundingClientRect();
+        // const windowHeight = window.innerHeight || document.documentElement.clientHeight;
+        const windowWidth = window.innerWidth || document.documentElement.clientWidth;
+        const inView = rect.top <= 75 && rect.left >= 0 && rect.bottom >= 75 && rect.right <= windowWidth;
+        setPortfolioInView(inView);
+      }
+    };
     document.addEventListener("scroll", checkInView);
-    checkInView();
+    checkInView(); // check on start up in case we land on portfolio directly
     return () => document.removeEventListener("scroll", checkInView);
-  }, []);
+  }, [setPortfolioInView]);
 
   const classicalDescription =
-    "A classical music website featuring over 200 composers, 25,000 classical works and a built in music player. Explore the world of classical music by viewing composer descriptions, playing classical trivia, or exploring birth locations on an interactive map.";
+    "A classical music website featuring over 200 composers, 25,000 works, and a built-in music player. Explore the world of classical music with unique composer profiles, trivia, and an interactive map of birth locations.";
   const netSimDescription =
-    "A network simulator built with Python and Tkinter, inspired by Cisco's Packet Tracer. Build and test network topologies with protocols inlcuding IPv4 addressing, default gateways, static routing, DHCP, and more!";
-  const bradyDescription = "A world-wide public humanities archive. A world-wide public humanities archive. A world-wide public humanities archive.";
+    "A network simulator built with Python and Tkinter, inspired by Cisco's Packet Tracer. Build and test network topologies with protocols inlcuding IPv4 addressing, default gateways, static routing, DHCP, and more.";
+  const bradyDescription =
+    "A world-wide public humanities archive allowing people from around the globe to share how they are actively bettering their communities. Explore humanities projects and placemaking initiatives.";
 
   const classicalObject = {
     title: "Classical Library",
@@ -45,7 +44,8 @@ export const Portfolio: React.FC<propTypes> = ({ portfolioInView, setPortfolioIn
     description: classicalDescription,
     weblink: "https://classical-library.com/",
     gitlink: "https://github.com/KarimKabbara00/Classical-Library",
-    tech: ["ReactJS", "Express.js", "PostgreSQL", "Supabase"],
+    downlink: "",
+    tech: ["ReactJS", "CSS", "Express.js", "PostgreSQL"],
   };
 
   const netSimObj = {
@@ -54,6 +54,7 @@ export const Portfolio: React.FC<propTypes> = ({ portfolioInView, setPortfolioIn
     description: netSimDescription,
     weblink: "",
     gitlink: "https://github.com/KarimKabbara00/Classical-Library",
+    downlink: "https://github.com/KarimKabbara00/Classical-Library",
     tech: ["Python", "Tkinter"],
   };
 
@@ -63,6 +64,7 @@ export const Portfolio: React.FC<propTypes> = ({ portfolioInView, setPortfolioIn
     description: bradyDescription,
     weblink: "https://bradyhumanities.org/",
     gitlink: "",
+    downlink: "",
     tech: ["Django", "TailwindCSS", "MySQL", "Javascript"],
   };
 
@@ -74,11 +76,11 @@ export const Portfolio: React.FC<propTypes> = ({ portfolioInView, setPortfolioIn
   return (
     <div ref={targetRef} id="portfolio" className="relative min-h-dvh w-dvw px-10">
       <Title title="Portfolio" />
-      <animated.div style={showFlag} className="absolute right-0 flex items-center border-2 border-primary p-4 pr-5 text-white">
-        <FontAwesomeIcon icon={faInfoCircle} className="mr-2 text-xl text-primary" />
+      <animated.div style={showFlag} className="absolute right-0 top-28 flex items-center border-2 border-primary text-white xl:p-3 xl:pr-8 2xl:p-4 2xl:pr-5">
+        <FontAwesomeIcon icon={faInfoCircle} className="mr-2 text-primary xl:text-lg 2xl:text-xl" />
         Hover over an image to view a quick demo.
       </animated.div>
-      <div className="mt-12 flex flex-col gap-y-24 py-12">
+      <div className="mt-12 flex flex-col gap-y-24 xl:pt-6 2xl:py-12">
         <PortfolioItem object={classicalObject} />
         <PortfolioItem object={netSimObj} />
         <PortfolioItem object={bradyObj} />

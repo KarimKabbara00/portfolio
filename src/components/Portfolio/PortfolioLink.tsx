@@ -18,15 +18,16 @@ export const PortfolioLink: React.FC<propTypes> = ({ image, link, type }) => {
 
   return (
     <div className="relative" onMouseOver={() => setHovered(true)} onMouseOut={() => setHovered(false)}>
-      <div className="absolute z-10 h-full w-full border-2 border-primary bg-primary px-5 py-2"></div>
+      <div className="absolute z-10 h-full w-full border-2 border-primary bg-primary"></div>
       <animated.a
+        tabIndex={-1}
         style={animate}
         href={link}
         target="_blank"
         rel="noreferrer"
-        className="relative z-20 flex items-center justify-center border-2 border-primary bg-bgColor px-5 py-2 text-xl opacity-100">
-        <div className="flex items-center gap-x-5">
-          <img src={image} width="35px" />
+        className="relative z-20 flex items-center justify-center border-2 border-primary bg-bgColor xl:px-4 xl:py-2 xl:text-lg 2xl:px-5 2xl:py-2 2xl:text-xl">
+        <div className="flex items-center xl:gap-x-3 2xl:gap-x-5">
+          <img className="xl:w-8 2xl:w-9" src={image} alt={type} />
           <span>{type}</span>
         </div>
       </animated.a>

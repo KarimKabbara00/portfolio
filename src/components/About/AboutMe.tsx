@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { SkillItem } from "./SkillItem";
 import reactSVG from "../../icons/skills/react.svg";
 import tsSVG from "../../icons/skills/ts.svg";
@@ -22,6 +22,24 @@ interface propTypes {
 }
 
 export const AboutMe: React.FC<propTypes> = ({ aboutInView, setAboutInView }) => {
+  const targetRef = useRef<HTMLDivElement>(null);
+
+  // show flag for hovering over portfolio images
+  useEffect(() => {
+    const checkInView = () => {
+      if (targetRef.current) {
+        const rect = targetRef.current.getBoundingClientRect();
+        // const windowHeight = window.innerHeight || document.documentElement.clientHeight;
+        const windowWidth = window.innerWidth || document.documentElement.clientWidth;
+        const inView = rect.top <= 75 && rect.left >= 0 && rect.bottom >= 75 && rect.right <= windowWidth;
+        setAboutInView(inView);
+      }
+    };
+    document.addEventListener("scroll", checkInView);
+    checkInView(); // check on start up in case we land on portfolio directly
+    return () => document.removeEventListener("scroll", checkInView);
+  }, [setAboutInView]);
+
   const [showFrontend, setShowFrontend] = useState<boolean>(true);
 
   const animateFrontend = useSpring({
@@ -32,25 +50,20 @@ export const AboutMe: React.FC<propTypes> = ({ aboutInView, setAboutInView }) =>
     opacity: !showFrontend ? 1 : 0,
   });
 
-  const test = {};
-
   return (
-    <div className="relative min-h-dvh w-dvw">
+    <div ref={targetRef} id="about" className="relative min-h-dvh w-dvw">
       <Title title="About" />
       <div className="flex flex-row xl:flex-col xl:items-center 2xl:flex-row">
         <div className="flex flex-col items-center justify-center gap-y-10 xl:w-3/5 2xl:w-1/2">
-          <img className="rounded-full xl:pt-6" src="https://karimkabbara00.github.io/assets/img/profile-img.jpg" width="225px" />
-          <div>Karim Kabbara</div>
-          <div className="text-lg leading-9 text-white xl:w-full 2xl:w-3/5">
-            I am a computer science graduate with a strong passion for frontend development and an <span className="text-primary">ambition</span> to transition into full stack development. I am
-            proficient in <span className="text-primary">ReactJS</span>,&nbsp;
-            <span className="text-primary">Express.js</span>, <span className="text-primary">JavaScript</span>, and all things web development. I firmly believe in the{" "}
-            <span className="text-primary">growth mindset</span> and the importance of continuous&nbsp;
-            <span className="text-primary">self-improvement</span>. I am never faced with a challenge I cannot overcome. In my free time, I like to work on side-projects, play tennis, and play the
-            piano.
+          <img className="rounded-full shadow-2xl shadow-primary xl:my-2" src="https://karimkabbara00.github.io/assets/img/profile-img.jpg" width="225px" alt="Karim Kabbara Portrait" />
+          {/* <div>Karim Kabbara</div> */}
+          <div className="xl:leading-9 text-white xl:w-full xl:text-base xl:leading-8 2xl:w-3/5 2xl:text-lg">
+            I am a computer science graduate with a strong passion for frontend development and an ambition to transition into full stack development. I am proficient in ReactJS,&nbsp; Express.js,
+            JavaScript, and all things web development. I firmly believe in the growth mindset and the importance of continuous&nbsp; self-improvement. I am never faced with a challenge I cannot
+            overcome. In my free time, I like to work on side-projects, play tennis, and play the piano.
             <br />
             <br />
-            View my resume here.
+            View my resume <a className="cursor-pointer text-primary underline hover:text-secondary">here</a>.
           </div>
         </div>
 

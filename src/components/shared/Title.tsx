@@ -1,5 +1,4 @@
 import React from "react";
-import styles from "../css/.module.css";
 
 interface propType {
   title: string;
