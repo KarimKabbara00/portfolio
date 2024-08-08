@@ -54,7 +54,7 @@ export const LandingSection: React.FC<propTypes> = ({ landingInView, setLandingI
         type="button"
         onClick={goToAbout}
         style={hoverAnim}
-        className="flex items-center justify-center gap-x-2 border-2 border-primary text-primary xl:h-12 xl:w-40 xl:text-lg 2xl:h-14 2xl:w-44 2xl:text-xl">
+        className="flex items-center rounded-sm justify-center gap-x-2 border-2 border-primary text-primary xl:h-12 xl:w-40 xl:text-lg 2xl:h-14 2xl:w-44 2xl:text-xl">
         <div>View my work</div>
         <FontAwesomeIcon className="text-base" icon={faArrowDown} />
       </animated.button>

@@ -8,6 +8,7 @@ interface effectObject {
   toY: number;
   color: string;
   size: string;
+  duration: number;
 }
 // ---------------- Interfaces ---------------- //
 
@@ -31,13 +32,14 @@ export const setUpBackgroundEffect = (windowWidth: number, windowHeight: number)
   const sizes = ["0.13rem", "0.14rem", "0.15rem"];
 
   let particleConfiguration: effectObject[] = [];
-  for (let i = 0; i < 50; i++) {
+  for (let i = 0; i < 100; i++) {
     let fromHorizontal = getRandomBetween(0, windowWidth);
     let toHorizontal = getRandomBetween(0, windowWidth);
     let fromVertical = getRandomBetween(0, windowHeight);
     let toVertical = getRandomBetween(0, windowHeight);
     let colorNum = getRandomBetween(0, 2); // 0-1
     let sizeNum = getRandomBetween(0, 2); // 0-2
+    let duration = getRandomBetween(30000, 60001); // 30k-60k
     particleConfiguration.push({
       fromX: fromHorizontal,
       toX: toHorizontal,
@@ -45,12 +47,9 @@ export const setUpBackgroundEffect = (windowWidth: number, windowHeight: number)
       toY: toVertical,
       color: colors[colorNum],
       size: sizes[sizeNum],
+      duration: duration,
     });
   }
   console.log(particleConfiguration);
   return particleConfiguration;
-};
-
-export const nonLinearNegativeParabolicTrend = (percentage: number): number => {
-  return -4 * Math.pow(percentage - 0.5, 2) + 1;
 };

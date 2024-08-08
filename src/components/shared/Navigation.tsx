@@ -44,7 +44,7 @@ export const Navigation: React.FC<propTypes> = ({ landingInView, aboutInView, po
   });
 
   return (
-    <animated.div style={showNav} className="z-100 fixed bottom-6 ml-3 flex w-12 flex-col items-center gap-y-8 text-white">
+    <animated.div style={showNav} className="z-100 fixed bottom-6 ml-3 flex w-12 flex-col items-center gap-y-7 text-white">
       <animated.div style={landingNav} className="cursor-pointer" onClick={() => goTo("home")}>
         <FontAwesomeIcon icon={faHome} className="xl:text-xl 2xl:text-2xl" />
       </animated.div>

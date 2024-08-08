@@ -8,6 +8,7 @@ interface EffectType {
   toY: number;
   color: string;
   size: string;
+  duration: number;
 }
 
 export const BackgroundEffects: React.FC<{ effects: EffectType[] }> = ({ effects }) => {

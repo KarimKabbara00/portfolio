@@ -14,6 +14,7 @@ interface EffectType {
   toY: number;
   color: string;
   size: string;
+  duration: number;
 }
 
 function App() {
@@ -23,7 +24,7 @@ function App() {
   const [contactInView, setContactInView] = useState<boolean>(false);
 
   const [backgroundEffect, setBackgroundEffect] = useState<EffectType[]>([]);
-  const [backgroundEffectTwo, setBackgroundEffectTwo] = useState<EffectType[]>([]);
+  // const [backgroundEffectTwo, setBackgroundEffectTwo] = useState<EffectType[]>([]);
 
   // initialize background effect
   useEffect(() => {
@@ -33,28 +34,28 @@ function App() {
     // initiate instantly, particles disappear after 60s
     setBackgroundEffect(setUpBackgroundEffect(windowWidth, windowHeight));
 
-    setTimeout(() => {
-      setBackgroundEffectTwo(setUpBackgroundEffect(windowWidth, windowHeight));
-    }, 10000);
+    // setTimeout(() => {
+    //   setBackgroundEffectTwo(setUpBackgroundEffect(windowWidth, windowHeight));
+    // }, 10000);
 
     const particleInterval = setInterval(() => {
       setBackgroundEffect(setUpBackgroundEffect(windowWidth, windowHeight));
     }, 60000);
 
-    const particleIntervalTwo = setInterval(() => {
-      setBackgroundEffectTwo(setUpBackgroundEffect(windowWidth, windowHeight));
-    }, 60000);
+    // const particleIntervalTwo = setInterval(() => {
+    //   setBackgroundEffectTwo(setUpBackgroundEffect(windowWidth, windowHeight));
+    // }, 60000);
 
     return () => {
       clearInterval(particleInterval);
-      clearInterval(particleIntervalTwo);
+      // clearInterval(particleIntervalTwo);
     };
   }, []);
 
   return (
     <div className="z-1 relative m-0 flex flex-col overflow-x-hidden p-0">
       <BackgroundEffects effects={backgroundEffect} />
-      <BackgroundEffects effects={backgroundEffectTwo} />
+      {/* <BackgroundEffects effects={backgroundEffectTwo} /> */}
       <LandingSection landingInView={landingInView} setLandingInView={setLandingInView} />
       <AboutMe aboutInView={aboutInView} setAboutInView={setAboutInView} />
       <Portfolio portfolioInView={portfolioInView} setPortfolioInView={setPortfolioInView} />
