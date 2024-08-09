@@ -1,20 +1,21 @@
 import React, { useState, useEffect, useRef } from "react";
 import { SkillItem } from "./SkillItem";
-import reactSVG from "../../icons/skills/react.svg";
-import tsSVG from "../../icons/skills/ts.svg";
-import jsSVG from "../../icons/skills/js.svg";
-import expSVG from "../../icons/skills/express.svg";
-import tailSVG from "../../icons/skills/tailwind.svg";
-import htmlSVG from "../../icons/skills/html.svg";
-import cssSVG from "../../icons/skills/css.svg";
-import psqlSVG from "../../icons/skills/psql.svg";
-import pySVG from "../../icons/skills/py.svg";
-import angSVG from "../../icons/skills/angular.svg";
-import restSVG from "../../icons/skills/rest.svg";
-import djangoSVG from "../../icons/skills/django.svg";
+import reactSVG from "../../assets/icons/skills/react.svg";
+import tsSVG from "../../assets/icons/skills/ts.svg";
+import jsSVG from "../../assets/icons/skills/js.svg";
+import expSVG from "../../assets/icons/skills/express.svg";
+import tailSVG from "../../assets/icons/skills/tailwind.svg";
+import htmlSVG from "../../assets/icons/skills/html.svg";
+import cssSVG from "../../assets/icons/skills/css.svg";
+import psqlSVG from "../../assets/icons/skills/psql.svg";
+import pySVG from "../../assets/icons/skills/py.svg";
+import angSVG from "../../assets/icons/skills/angular.svg";
+import restSVG from "../../assets/icons/skills/rest.svg";
+import djangoSVG from "../../assets/icons/skills/django.svg";
 import { Title } from "../shared/Title";
 import { SkillToggle } from "./SkillToggle";
 import { animated, useSpring } from "@react-spring/web";
+import resume from "../../assets/Karim_Kabbara_Resume.pdf";
 
 interface propTypes {
   aboutInView: boolean;
@@ -57,13 +58,17 @@ export const AboutMe: React.FC<propTypes> = ({ aboutInView, setAboutInView }) =>
         <div className="flex flex-col items-center justify-center gap-y-10 xl:w-3/5 2xl:w-1/2">
           <img className="rounded-full shadow-2xl shadow-primary xl:my-2" src="https://karimkabbara00.github.io/assets/img/profile-img.jpg" width="225px" alt="Karim Kabbara Portrait" />
           {/* <div>Karim Kabbara</div> */}
-          <div className="xl:leading-9 text-white xl:w-full xl:text-base xl:leading-8 2xl:w-3/5 2xl:text-lg">
+          <div className="text-white xl:w-full xl:text-base xl:leading-8 2xl:w-3/5 2xl:text-lg">
             I am a computer science graduate with a strong passion for frontend development and an ambition to transition into full stack development. I am proficient in ReactJS,&nbsp; Express.js,
             JavaScript, and all things web development. I firmly believe in the growth mindset and the importance of continuous&nbsp; self-improvement. I am never faced with a challenge I cannot
             overcome. In my free time, I like to work on side-projects, play tennis, and play the piano.
             <br />
             <br />
-            View my resume <a className="cursor-pointer text-primary underline hover:text-secondary">here</a>.
+            View my resume{" "}
+            <a href={resume} target="_blank" rel="noreferrer" className="cursor-pointer text-primary underline hover:text-secondary">
+              here
+            </a>
+            .
           </div>
         </div>
 

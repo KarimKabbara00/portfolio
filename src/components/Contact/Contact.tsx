@@ -3,7 +3,9 @@ import { useSpring, animated } from "@react-spring/web";
 import { Title } from "../shared/Title";
 import { ContactField } from "./ContactField";
 import { ContactTextArea } from "./ContactTextArea";
-
+import { Footer } from "../Footer/Footer";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCheck, faSpinner, faX } from "@fortawesome/free-solid-svg-icons";
 interface propTypes {
   contactInView: boolean;
   setContactInView: (inView: boolean) => void;
@@ -40,28 +42,79 @@ export const Contact: React.FC<propTypes> = ({ contactInView, setContactInView }
     config: { tension: 600, friction: 30 },
   });
 
-  function sendMessage(event: React.FormEvent<HTMLFormElement>) {
+  const [messageSent, setMessageSent] = useState<boolean>(false);
+  const [responseReceived, setResponseReceived] = useState<boolean>(false);
+  const [messageError, setMessageError] = useState<boolean>(false);
+  async function sendMessage(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    const formUrl = "https://formspree.io/f/mwpebora";
+    try {
+      setMessageSent(true);
+      setResponseReceived(false);
+      setMessageError(false);
+      const response = await fetch(formUrl, {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          "Your Name": name,
+          Subject: subject,
+          message: content,
+        }),
+      });
+      console.log(response);
+      if (response.ok === true) {
+        setMessageSent(false);
+        setResponseReceived(true);
+      } else {
+        setMessageSent(false);
+        setMessageError(true);
+      }
+    } catch (e) {
+      setMessageSent(false);
+      setMessageError(true);
+      console.log(e);
+    }
   }
 
   return (
     <div ref={targetRef} id="contact" className="relative h-screen w-screen text-white">
       <Title title="Contact" />
-      <div className="ml-auto mr-auto mt-8 w-fit">Please reach out if you would like to work together.</div>
+      <div className="ml-auto mr-auto mt-8 w-fit">If you're interested in collaborating, feel free to contact me. I'm open to discussing any opportunities.</div>
       <form onSubmit={sendMessage} className="relative ml-auto mr-auto mt-8 flex w-5/12 flex-col items-center gap-y-5">
-        <ContactField placeholder="Your Name" value={name} onChange={setName} />
+        <ContactField placeholder="Name" value={name} onChange={setName} />
         <ContactField placeholder="Subject" value={subject} onChange={setSubject} />
-        <ContactTextArea value={content} setValue={setContent} />
-        <animated.button
-          tabIndex={-1}
-          onMouseOver={() => setButtonHovered(true)}
-          onMouseOut={() => setButtonHovered(false)}
-          type="submit"
-          style={hoverAnim}
-          className="h-12 w-40 self-start rounded-sm border-2 border-primary text-lg text-primary">
-          <div>Send Message</div>
-        </animated.button>
+        <ContactTextArea value={content} onChange={setContent} />
+        <div className="flex w-full items-center justify-between">
+          <div className="flex items-center">
+            <animated.button
+              tabIndex={-1}
+              onMouseOver={() => setButtonHovered(true)}
+              onMouseOut={() => setButtonHovered(false)}
+              type="submit"
+              style={hoverAnim}
+              className="h-12 w-40 self-start rounded-sm border-2 border-primary text-lg text-primary">
+              <div>Send Message</div>
+            </animated.button>
+            {messageSent && !responseReceived && <FontAwesomeIcon className="fa-spin ml-4 text-2xl" icon={faSpinner} />}
+            {responseReceived && (
+              <div className="ml-3 flex items-center gap-x-2">
+                <FontAwesomeIcon className="text-2xl text-green-600" icon={faCheck} />
+                <span className="text-[0.9rem]">Thanks for contacting me. I’ll get back to you soon!</span>
+              </div>
+            )}
+            {messageError && (
+              <div className="ml-3 flex items-center gap-x-2">
+                <FontAwesomeIcon className="text-2xl text-red-600" icon={faX} />
+                <span className="text-[0.9rem]">Error sending message. Please email me directly.</span>
+              </div>
+            )}
+          </div>
+        </div>
       </form>
+      <Footer />
     </div>
   );
 };

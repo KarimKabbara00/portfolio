@@ -1,8 +1,8 @@
 import React, { useEffect, useRef } from "react";
 import { Title } from "../shared/Title";
 import { PortfolioItem } from "./PortfolioItem";
-import classicalPng from "../../portfolioImages/classicalLibrary.png";
-import bradyPNG from "../../portfolioImages/bradyHumanities.png";
+import classicalPng from "../../assets/portfolioImages/classicalLibrary.png";
+import bradyPNG from "../../assets/portfolioImages/bradyHumanities.png";
 import { useSpring, animated } from "@react-spring/web";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faInfoCircle } from "@fortawesome/free-solid-svg-icons";
@@ -36,7 +36,7 @@ export const Portfolio: React.FC<propTypes> = ({ portfolioInView, setPortfolioIn
   const netSimDescription =
     "A network simulator built with Python and Tkinter, inspired by Cisco's Packet Tracer. Build and test network topologies with protocols inlcuding IPv4 addressing, default gateways, static routing, DHCP, and more.";
   const bradyDescription =
-    "A world-wide public humanities archive allowing people from around the globe to share how they are actively bettering their communities. Explore humanities projects and placemaking initiatives.";
+    "A world-wide public humanities archive allowing people from all over the globe to share how their ongoing efforts in bettering their communities. Explore a variety of humanities projects and placemaking initiatives.";
 
   const classicalObject = {
     title: "Classical Library",
@@ -76,7 +76,7 @@ export const Portfolio: React.FC<propTypes> = ({ portfolioInView, setPortfolioIn
   return (
     <div ref={targetRef} id="portfolio" className="relative min-h-dvh w-dvw px-10">
       <Title title="Portfolio" />
-      <animated.div style={showFlag} className="absolute right-0 top-28 flex items-center border-2 border-primary text-white xl:p-3 xl:pr-8 2xl:p-4 2xl:pr-5">
+      <animated.div style={showFlag} className="absolute right-0 top-28 rounded-sm flex items-center border-2 border-primary text-white xl:p-3 xl:pr-8 2xl:p-4 2xl:pr-5">
         <FontAwesomeIcon icon={faInfoCircle} className="mr-2 text-primary xl:text-lg 2xl:text-xl" />
         Hover over an image to view a quick demo.
       </animated.div>

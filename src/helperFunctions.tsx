@@ -29,16 +29,16 @@ export const checkInView = (targetRef: RefObject<HTMLDivElement>, name: string, 
 
 export const setUpBackgroundEffect = (windowWidth: number, windowHeight: number): effectObject[] => {
   const colors = ["#ef233c", "#C98D00"];
-  const sizes = ["0.13rem", "0.14rem", "0.15rem"];
+  const sizes = ["0.13rem", "0.14rem"];
 
   let particleConfiguration: effectObject[] = [];
-  for (let i = 0; i < 100; i++) {
+  for (let i = 0; i < 75; i++) {
     let fromHorizontal = getRandomBetween(0, windowWidth);
     let toHorizontal = getRandomBetween(0, windowWidth);
     let fromVertical = getRandomBetween(0, windowHeight);
     let toVertical = getRandomBetween(0, windowHeight);
     let colorNum = getRandomBetween(0, 2); // 0-1
-    let sizeNum = getRandomBetween(0, 2); // 0-2
+    let sizeNum = getRandomBetween(0, 2); // 0-1
     let duration = getRandomBetween(30000, 60001); // 30k-60k
     particleConfiguration.push({
       fromX: fromHorizontal,

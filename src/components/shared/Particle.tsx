@@ -15,7 +15,7 @@ interface propType {
   effect: effectObject;
 }
 
-export const Particle: React.FC<propType> = ({ effect }) => {
+export const Particle: React.FC<propType> = React.memo(({ effect }) => {
   const [opacity, setOpacity] = useState<number>(0);
 
   const particleAnimation = useSpring({
@@ -40,4 +40,4 @@ export const Particle: React.FC<propType> = ({ effect }) => {
   };
 
   return <animated.div style={{ ...particleAnimation, ...particleStyle }} className="-z-1 fixed rounded-full bg-red-500"></animated.div>;
-};
+});

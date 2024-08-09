@@ -11,7 +11,7 @@ interface EffectType {
   duration: number;
 }
 
-export const BackgroundEffects: React.FC<{ effects: EffectType[] }> = ({ effects }) => {
+export const BackgroundEffects: React.FC<{ effects: EffectType[] }> = React.memo(({ effects }) => {
   return (
     <>
       {effects.map((effect, index) => (
@@ -19,4 +19,4 @@ export const BackgroundEffects: React.FC<{ effects: EffectType[] }> = ({ effects
       ))}
     </>
   );
-};
+});

@@ -19,6 +19,7 @@ module.exports = {
         primary: "#ef233c",
         secondary: "#EF233C",
         tertiary: "#E7ECEF",
+        textPlaceholder: "#9ca3af"
       },
       boxShadow: {
         portfolioImage: "0px 0px 20px 2px rgba(239, 35, 60, 1)",
