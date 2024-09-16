@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.0eb09173.css",
-    "main.js": "/static/js/main.567d50b2.js",
+    "main.js": "/static/js/main.f8e076c5.js",
     "static/media/bradyHumanities.png": "/static/media/bradyHumanities.42f40d63452063e07042.png",
     "static/media/Karim_Kabbara_SecPlus.pdf": "/static/media/Karim_Kabbara_SecPlus.8ebaa5109ee0cc32bed9.pdf",
     "static/media/classicalLibrary.png": "/static/media/classicalLibrary.9ef0eb9bb9be261bc7ce.png",
@@ -38,10 +38,10 @@
     "static/media/chevronLeft.svg": "/static/media/chevronLeft.cc45a5158ac2306bdf8b8526da99ae8e.svg",
     "static/media/chevronRight.svg": "/static/media/chevronRight.7567ccef3039aef7a529c38b46538f4d.svg",
     "main.0eb09173.css.map": "/static/css/main.0eb09173.css.map",
-    "main.567d50b2.js.map": "/static/js/main.567d50b2.js.map"
+    "main.f8e076c5.js.map": "/static/js/main.f8e076c5.js.map"
   },
   "entrypoints": [
     "static/css/main.0eb09173.css",
-    "static/js/main.567d50b2.js"
+    "static/js/main.f8e076c5.js"
   ]
 }
