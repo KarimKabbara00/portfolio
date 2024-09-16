@@ -72,7 +72,7 @@ export const GPTModal: React.FC<Props> = ({ showGPTModal, setShowGPTModal }) => 
     setAwaitingResponse(true); // loading anim
 
     axios
-      .post(`${process.env.REACT_APP_BASE_URL}/ask-gpt`, {
+      .post(`${process.env.REACT_APP_BASE_URL}/api/ask-gpt`, {
         prompt,
       })
       .then((res) => {
