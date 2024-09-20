@@ -27,18 +27,18 @@ export const PortfolioItem: React.FC<Props> = ({ object, isTouchDevice }) => {
   const isMidScreen = useMediaQuery({ query: "(max-width: 1300px)" });
 
   const [hovered, setHovered] = useState<boolean>(false);
-  const scale = useSpring({
-    transform: hovered ? "scale(1.05)" : "scale(1)",
-    transformOrigin: "center",
-  });
+  // const scale = useSpring({
+  //   transform: hovered ? "scale(1.05)" : "scale(1)",
+  //   transformOrigin: "center",
+  // });
 
   return (
     <div className="mt-4 grid w-fit grid-cols-2 gap-12 pl-10 midScreen:grid-cols-1 midScreen:gap-5 midScreen:pl-0">
       {isMidScreen && <div className="relative z-20 self-start text-4xl text-white xsScreen:text-[2rem]">{object.title}</div>}
 
-      <div className="aspect-w-16 aspect-h-9 relative w-full">
-        {!hovered && <img onMouseOver={() => setHovered(true)} className="h-full w-full border-2 border-primary object-cover shadow-portfolioImage" src={object.image} alt={object.title} />}
-        {hovered && (
+      <div className="aspect-h-9 aspect-w-16 relative w-full">
+        <img onMouseOver={() => setHovered(true)} className="h-full w-full border-2 border-primary object-cover shadow-portfolioImage" src={object.image} alt={object.title} />
+        {/* {hovered && (
           <animated.video
             style={scale}
             className="h-full w-full border-2 border-primary object-cover shadow-portfolioImage"
@@ -50,7 +50,7 @@ export const PortfolioItem: React.FC<Props> = ({ object, isTouchDevice }) => {
             <source src={object.gif} type="video/mp4" />
             Your browser does not support the video tag.
           </animated.video>
-        )}
+        )} */}
       </div>
 
       <div className="mx-2 flex w-11/12 flex-col items-center text-white midScreen:mx-0">

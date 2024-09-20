@@ -1,10 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.cf2ea528.css",
-    "main.js": "/static/js/main.e7f17a53.js",
-    "static/media/bradyHumanities.mp4": "/static/media/bradyHumanities.22d22d170af5a5d8781e.mp4",
-    "static/media/classicalLibrary.mp4": "/static/media/classicalLibrary.e18e864f323aff82e5b8.mp4",
-    "static/media/netSim.mp4": "/static/media/netSim.a99306686809492e95ac.mp4",
+    "main.js": "/static/js/main.6503ae97.js",
     "static/media/bradyHumanities.png": "/static/media/bradyHumanities.e01d07d9d6b7ad270b98.png",
     "static/media/Karim_Kabbara_SecPlus.pdf": "/static/media/Karim_Kabbara_SecPlus.8ebaa5109ee0cc32bed9.pdf",
     "static/media/Karim_Kabbara_CCNA.pdf": "/static/media/Karim_Kabbara_CCNA.cc8b6d77a66e66b1bc2f.pdf",
@@ -41,10 +38,10 @@
     "static/media/chevronLeft.svg": "/static/media/chevronLeft.cc45a5158ac2306bdf8b8526da99ae8e.svg",
     "static/media/chevronRight.svg": "/static/media/chevronRight.7567ccef3039aef7a529c38b46538f4d.svg",
     "main.cf2ea528.css.map": "/static/css/main.cf2ea528.css.map",
-    "main.e7f17a53.js.map": "/static/js/main.e7f17a53.js.map"
+    "main.6503ae97.js.map": "/static/js/main.6503ae97.js.map"
   },
   "entrypoints": [
     "static/css/main.cf2ea528.css",
-    "static/js/main.e7f17a53.js"
+    "static/js/main.6503ae97.js"
   ]
 }
