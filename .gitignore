@@ -5,3 +5,11 @@
 
 # secrets
 /.env
+
+# media
+/build/static/media/bradyHumanities.22d22d170af5a5d8781e.mp4
+/build/static/media/classicalLibrary.e18e864f323aff82e5b8.mp4
+/build/static/media/netSim.a99306686809492e95ac.mp4
+/frontend/src/assets/portfolioImages/bradyHumanities.mp4
+/frontend/src/assets/portfolioImages/classicalLibrary.mp4
+/frontend/src/assets/portfolioImages/netSim.mp4

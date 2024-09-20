@@ -40,10 +40,10 @@ export const OtherSkill: React.FC<propTypes> = ({ icon, alt, name, animate = fal
     <animated.div
       className="flex w-24 flex-col items-center gap-y-1"
       style={animate ? { ...scaleAnim, cursor: "pointer" } : {}}
-      onClick={openResource}
+      onClick={animate ? openResource : void 0}
       onMouseOver={() => setHovered(true)}
       onMouseOut={() => setHovered(false)}
-      role="button"
+      role={animate ? "button" : "none"}
       aria-label={alt}>
       <img className={size} src={icon} alt={alt} />
       <span className="text-center font-mono text-sm text-white largeScreen:text-xs midScreen:text-sm">{name}</span>

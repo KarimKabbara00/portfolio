@@ -27,6 +27,9 @@ module.exports = {
       borderWidth: {
         thin: "1px",
       },
+      height: {
+        128: "32rem",
+      },
     },
     screens: {
       xlScreen: { max: "2000px" },
@@ -47,5 +50,5 @@ module.exports = {
       pointerEvents: ["responsive"],
     },
   },
-  plugins: [],
+  plugins: [require("@tailwindcss/aspect-ratio")],
 };

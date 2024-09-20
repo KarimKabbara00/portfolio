@@ -4,7 +4,7 @@ import { AboutMe } from "./components/About/AboutMe";
 import { Portfolio } from "./components/Portfolio/Portfolio";
 import { Contact } from "./components/Contact/Contact";
 import { Navigation } from "./components/shared/Navigation";
-import { ParticleEffect } from "./components/shared/BackgroundEffect";
+import { ParticleEffect } from "./components/shared/ParticleEffect";
 import { AskGPTButton } from "./components/AskGPT/AskGPTButton";
 import { GPTModal } from "./components/AskGPT/GPTModal";
 

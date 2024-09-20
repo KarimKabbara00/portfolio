@@ -12,21 +12,21 @@ interface ParticleProps extends MeshProps {
 export const Particle: React.FC<ParticleProps> = ({ position, color, velocity, boundary }) => {
   const ref = useRef<Mesh>(null);
 
-  useFrame(() => {
-    if (ref.current) {
-      ref.current.position.x += velocity[0];
-      ref.current.position.y += velocity[1];
-      if (ref.current.position.x > boundary.width) ref.current.position.x = -boundary.width;
-      if (ref.current.position.x < -boundary.width) ref.current.position.x = boundary.width;
-      if (ref.current.position.y > boundary.height) ref.current.position.y = -boundary.height;
-      if (ref.current.position.y < -boundary.height) ref.current.position.y = boundary.height;
-    }
-  });
+    useFrame(() => {
+      if (ref.current) {
+        ref.current.position.x += velocity[0];
+        ref.current.position.y += velocity[1];
+        if (ref.current.position.x > boundary.width) ref.current.position.x = -boundary.width;
+        if (ref.current.position.x < -boundary.width) ref.current.position.x = boundary.width;
+        if (ref.current.position.y > boundary.height) ref.current.position.y = -boundary.height;
+        if (ref.current.position.y < -boundary.height) ref.current.position.y = boundary.height;
+      }
+    });
 
   return (
-    <mesh ref={ref} position={position}>
-      <circleGeometry args={[0.009, 32]} />
-      <meshBasicMaterial color={color} />
+        <mesh ref={ref} position={position}>
+          <circleGeometry args={[0.009, 32]} />
+          <meshBasicMaterial color={color} />
     </mesh>
   );
 };

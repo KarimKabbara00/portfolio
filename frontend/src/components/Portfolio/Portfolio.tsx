@@ -2,11 +2,14 @@ import React, { useEffect, useRef } from "react";
 import { Title } from "../shared/Title";
 import { PortfolioItem } from "./PortfolioItem";
 import classicalPNG from "../../assets/portfolioImages/classicalLibrary.png";
+import classicalGIF from "../../assets/portfolioImages/classicalLibrary.mp4";
 import netSimPNG from "../../assets/portfolioImages/netSim.png";
+import netSimGIF from "../../assets/portfolioImages/netSim.mp4";
 import bradyPNG from "../../assets/portfolioImages/bradyHumanities.png";
-// import { useSpring, animated } from "@react-spring/web";
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-// import { faInfoCircle } from "@fortawesome/free-solid-svg-icons";
+import bradyGIF from "../../assets/portfolioImages/bradyHumanities.mp4";
+import { useSpring, animated } from "@react-spring/web";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faInfoCircle } from "@fortawesome/free-solid-svg-icons";
 
 interface propTypes {
   portfolioInView: boolean;
@@ -42,6 +45,7 @@ export const Portfolio: React.FC<propTypes> = ({ portfolioInView, setPortfolioIn
   const classicalObject = {
     title: "Classical Library",
     image: classicalPNG,
+    gif: classicalGIF,
     description: classicalDescription,
     weblink: "https://classical-library.com/",
     gitlink: "https://github.com/KarimKabbara00/Classical-Library",
@@ -52,6 +56,7 @@ export const Portfolio: React.FC<propTypes> = ({ portfolioInView, setPortfolioIn
   const netSimObj = {
     title: "Network Simulator",
     image: netSimPNG,
+    gif: netSimGIF,
     description: netSimDescription,
     weblink: "",
     gitlink: "https://github.com/KarimKabbara00/Network-Simulator",
@@ -62,6 +67,7 @@ export const Portfolio: React.FC<propTypes> = ({ portfolioInView, setPortfolioIn
   const bradyObj = {
     title: "Brady Humanties Archive",
     image: bradyPNG,
+    gif: bradyGIF,
     description: bradyDescription,
     weblink: "https://bradyhumanities.org/",
     gitlink: "",
@@ -69,22 +75,26 @@ export const Portfolio: React.FC<propTypes> = ({ portfolioInView, setPortfolioIn
     tech: ["Django", "Javascript", "MySQL", "TailwindCSS"],
   };
 
-  // const showFlag = useSpring({
-  //   from: { transform: portfolioInView ? "translateX(100%)" : "translateX(-2%)" },
-  //   to: { transform: portfolioInView ? "translateX(2%)" : "translateX(100%)" },
-  // });
+  const showFlag = useSpring({
+    from: { transform: portfolioInView ? "translateX(100%)" : "translateX(-2%)" },
+    to: { transform: portfolioInView ? "translateX(2%)" : "translateX(100%)" },
+  });
+
+  const isTouchDevice = "ontouchstart" in window || navigator.maxTouchPoints > 0;
 
   return (
     <div ref={targetRef} id="portfolio" className="-z-1 relative min-h-dvh w-dvw px-4">
       <Title title="Portfolio" />
-      {/* <animated.div style={showFlag} className="absolute right-0 top-28 flex items-center rounded-sm border-2 border-primary text-white xl:p-3 xl:pr-8 2xl:p-4 2xl:pr-5">
-        <FontAwesomeIcon icon={faInfoCircle} className="mr-2 text-primary xl:text-lg 2xl:text-xl" />
-        Hover over an image to view a quick demo.
-      </animated.div> */}
-      <div className="midScreen:pt-0 mt-12 flex flex-col midScreen:gap-y-14 gap-y-16 pb-16 pt-3">
-        <PortfolioItem object={classicalObject} />
-        <PortfolioItem object={netSimObj} />
-        <PortfolioItem object={bradyObj} />
+      <animated.div
+        style={showFlag}
+        className="absolute right-0 top-32 flex items-center rounded-sm border-2 border-primary p-3 pr-10 text-lg text-white midScreen:top-[8.25rem] midScreen:pr-6 midScreen:text-base xxsScreen:text-sm">
+        <FontAwesomeIcon icon={faInfoCircle} className="xl:text-lg 2xl:text-xl mr-2 text-primary" />
+        {isTouchDevice ? "Tap on " : "Hover over "}an image to view a quick demo.
+      </animated.div>
+      <div className="mt-12 flex flex-col gap-y-16 pb-16 pt-3 midScreen:gap-y-14 midScreen:pt-0">
+        <PortfolioItem object={classicalObject} isTouchDevice={isTouchDevice} />
+        <PortfolioItem object={netSimObj} isTouchDevice={isTouchDevice} />
+        <PortfolioItem object={bradyObj} isTouchDevice={isTouchDevice} />
       </div>
     </div>
   );
