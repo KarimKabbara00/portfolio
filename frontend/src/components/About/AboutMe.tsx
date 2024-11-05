@@ -24,9 +24,8 @@ import gitSVG from "../../assets/icons/skills/git.svg";
 import gradSVG from "../../assets/icons/skills/grad.svg";
 import ciscoSVG from "../../assets/icons/skills/cisco.svg";
 import secPlusSVG from "../../assets/icons/skills/sec+.svg";
-
 import resume from "../../assets/Karim_Kabbara_Resume.pdf";
-
+import me from "../../assets/me.png";
 
 interface propTypes {
   aboutInView: boolean;
@@ -80,7 +79,7 @@ export const AboutMe: React.FC<propTypes> = ({ aboutInView, setAboutInView }) =>
       <Title title="About" />
       <div className="relative flex h-full midScreen:mt-10 midScreen:flex-col midScreen:items-center">
         <div className="flex w-1/2 flex-col items-center justify-center gap-y-6 midScreen:w-11/12">
-          <img className="mb-2 w-60 rounded-full border-2" src="https://karimkabbara00.github.io/assets/img/profile-img.jpg" alt="Karim Kabbara Portrait" />
+          <img className="mb-2 w-60 rounded-full border-2" src={me} alt="Karim Kabbara Portrait" />
           <div className="flex items-start justify-center gap-x-6">
             <OtherSkill name="B.S. in Computer Science" alt="B.S. in Computer Science" icon={gradSVG} size="h-14" animate />
             <OtherSkill
