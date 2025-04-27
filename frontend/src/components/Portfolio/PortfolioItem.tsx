@@ -1,58 +1,23 @@
-import React, { useState } from "react";
+import React from "react";
 import { PortfolioLink } from "./PortfolioLink";
 import github from "../../assets/icons/portfolio/github.svg";
 import globe from "../../assets/icons/portfolio/globe.svg";
 import down from "../../assets/icons/portfolio/down.svg";
 import { PortfolioTechnology } from "./PortfolioTechnology";
 import { useMediaQuery } from "react-responsive";
-import { useSpring, animated } from "@react-spring/web";
-
-interface PortfolioObejct {
-  title: string;
-  image: string;
-  gif: string;
-  description: string;
-  weblink: string;
-  gitlink: string;
-  downlink: string;
-  tech: string[];
-}
+import { PortfolioObject } from "./Portfolio";
 
 interface Props {
-  object: PortfolioObejct;
-  isTouchDevice: boolean;
+  object: PortfolioObject;
 }
 
-export const PortfolioItem: React.FC<Props> = ({ object, isTouchDevice }) => {
+export const PortfolioItem: React.FC<Props> = ({ object }) => {
   const isMidScreen = useMediaQuery({ query: "(max-width: 1300px)" });
-
-  const [hovered, setHovered] = useState<boolean>(false);
-  // const scale = useSpring({
-  //   transform: hovered ? "scale(1.05)" : "scale(1)",
-  //   transformOrigin: "center",
-  // });
 
   return (
     <div className="mt-4 grid w-fit grid-cols-2 gap-12 pl-10 midScreen:grid-cols-1 midScreen:gap-5 midScreen:pl-0">
       {isMidScreen && <div className="relative z-20 self-start text-4xl text-white xsScreen:text-[2rem]">{object.title}</div>}
-
-      <div className="aspect-h-9 aspect-w-16 relative w-full">
-        <img onMouseOver={() => setHovered(true)} className="h-full w-full border-2 border-primary object-cover shadow-portfolioImage" src={object.image} alt={object.title} />
-        {/* {hovered && (
-          <animated.video
-            style={scale}
-            className="h-full w-full border-2 border-primary object-cover shadow-portfolioImage"
-            onMouseOut={() => setHovered(false)}
-            autoPlay={hovered}
-            controls={isTouchDevice}
-            muted
-            loop>
-            <source src={object.gif} type="video/mp4" />
-            Your browser does not support the video tag.
-          </animated.video>
-        )} */}
-      </div>
-
+      <img className="h-full w-full border-2 border-primary object-cover shadow-portfolioImage" src={object.image} alt={object.title} />
       <div className="mx-2 flex w-11/12 flex-col items-center text-white midScreen:mx-0">
         {!isMidScreen && (
           <div className="relative w-fit self-start">

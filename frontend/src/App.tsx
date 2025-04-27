@@ -61,7 +61,7 @@ function App() {
       <Navigation showNav={showNav} setShowNav={setShowNav} landingInView={landingInView} aboutInView={aboutInView} portfolioInView={portfolioInView} contactInView={contactInView} />
       <LandingSection landingInView={landingInView} setLandingInView={setLandingInView} />
       <AboutMe aboutInView={aboutInView} setAboutInView={setAboutInView} />
-      <Portfolio portfolioInView={portfolioInView} setPortfolioInView={setPortfolioInView} />
+      <Portfolio setPortfolioInView={setPortfolioInView} />
       <Contact contactInView={contactInView} setContactInView={setContactInView} />
     </div>
   );
