@@ -1,50 +1,62 @@
-import React, { useState, useEffect } from "react";
-import { Canvas } from "@react-three/fiber";
-import { Particle } from "./Particle";
-
-interface ParticleData {
-  position: [number, number, number];
-  color: string;
-  velocity: [number, number];
-}
+import React, { useEffect, useRef } from "react";
 
 export const ParticleEffect: React.FC = () => {
-    const [particles, setParticles] = useState<ParticleData[]>([]);
-    const [boundaries, setBoundaries] = useState({ width: 0, height: 0 });
+  const canvasRef = useRef<HTMLCanvasElement>(null);
 
-    useEffect(() => {
-      const colors = ["#ef233c", "#CE6E00"];
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
 
-      // Calculate boundaries based on the screen size
-      const aspectRatio = window.innerWidth / window.innerHeight;
-      const cameraHeight = 10;
-      const cameraWidth = cameraHeight * aspectRatio;
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
 
-      setBoundaries({
-        width: cameraWidth / 2,
-        height: cameraHeight / 2,
-      });
+    const colors = ["#ef233c", "#CE6E00"];
 
-      const newParticles: ParticleData[] = [];
-      for (let i = 0; i < 20; i++) {
-        newParticles.push({
-          position: [
-            Math.random() * cameraWidth - cameraWidth / 2,
-            Math.random() * cameraHeight - cameraHeight / 2,
-            0, // 2D
-          ],
-          color: colors[Math.floor(Math.random() * colors.length)],
-          velocity: [Math.random() * 0.005 - 0.0025, Math.random() * 0.005 - 0.0025],
-        });
+    const resize = () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    };
+    resize();
+    window.addEventListener("resize", resize);
+
+    const particles = Array.from({ length: 20 }, () => ({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      vx: (Math.random() - 0.5) * 0.5,
+      vy: (Math.random() - 0.5) * 0.5,
+      color: colors[Math.floor(Math.random() * colors.length)],
+    }));
+
+    let animationId: number;
+
+    const animate = () => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      for (const p of particles) {
+        p.x += p.vx;
+        p.y += p.vy;
+
+        if (p.x > canvas.width) p.x = 0;
+        if (p.x < 0) p.x = canvas.width;
+        if (p.y > canvas.height) p.y = 0;
+        if (p.y < 0) p.y = canvas.height;
+
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, 1.5, 0, Math.PI * 2);
+        ctx.fillStyle = p.color;
+        ctx.fill();
       }
-      setParticles(newParticles);
-    }, []);
 
-  return (
-        <Canvas>
-          {particles.map((particle, index) => (
-            <Particle key={index} position={particle.position} color={particle.color} velocity={particle.velocity} boundary={boundaries} />
-          ))}
-        </Canvas>
-  );
+      animationId = requestAnimationFrame(animate);
+    };
+
+    animationId = requestAnimationFrame(animate);
+
+    return () => {
+      cancelAnimationFrame(animationId);
+      window.removeEventListener("resize", resize);
+    };
+  }, []);
+
+  return <canvas ref={canvasRef} className="h-full w-full" />;
 };

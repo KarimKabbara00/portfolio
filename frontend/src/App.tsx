@@ -1,10 +1,10 @@
-import React, { useState, useEffect, lazy, Suspense } from "react";
+import React, { useState, useEffect } from "react";
 import { LandingSection } from "./components/LandingSection/LandingSection";
 import { AboutMe } from "./components/About/AboutMe";
 import { Portfolio } from "./components/Portfolio/Portfolio";
 import { Contact } from "./components/Contact/Contact";
 import { Navigation } from "./components/shared/Navigation";
-const ParticleEffect = lazy(() => import("./components/shared/ParticleEffect").then((m) => ({ default: m.ParticleEffect })));
+import { ParticleEffect } from "./components/shared/ParticleEffect";
 import { AskGPTButton } from "./components/AskGPT/AskGPTButton";
 import { GPTModal } from "./components/AskGPT/GPTModal";
 
@@ -54,9 +54,7 @@ function App() {
   return (
     <div className="z-1 relative m-0 flex h-full flex-col overflow-x-hidden">
       <div className="-z-1 fixed h-full w-full">
-        <Suspense>
-          <ParticleEffect />
-        </Suspense>
+        <ParticleEffect />
       </div>
       <AskGPTButton setShowGPTModal={setShowGPTModal} />
       <GPTModal showGPTModal={showGPTModal} setShowGPTModal={setShowGPTModal} />

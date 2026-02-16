@@ -51,7 +51,8 @@ export const GPTModal: React.FC<Props> = ({ showGPTModal, setShowGPTModal }) => 
       setFirstOpenGPT(false);
     }
 
-    if (!showGPTModal) textAreaRef.current?.blur();
+    if (showGPTModal) textAreaRef.current?.focus();
+    else textAreaRef.current?.blur();
   }, [showGPTModal, firstOpenGPT]);
 
   const submitPrompt = useCallback(async () => {

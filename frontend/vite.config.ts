@@ -9,11 +9,9 @@ export default defineConfig({
   },
   build: {
     outDir: "dist",
-    chunkSizeWarningLimit: 1000,
     rollupOptions: {
       output: {
         manualChunks: {
-          three: ["three", "@react-three/fiber"],
           "react-vendor": ["react", "react-dom"],
           "react-spring": ["@react-spring/web"],
         },
