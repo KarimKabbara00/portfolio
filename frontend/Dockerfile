@@ -1,20 +1,25 @@
-# Use the official Node.js image as a parent image
-FROM node:20
+# Build stage
+FROM node:20 AS build
 
-# Set the working directory in the container
 WORKDIR /usr/src/app
 
-# Copy package.json and package-lock.json
 COPY package*.json ./
 
-# Install dependencies
-RUN npm install
+RUN npm ci
 
-# Copy the rest of the application code
 COPY . .
 
-# Expose the port that the app will run on
+RUN npm run build
+
+# Production stage
+FROM node:20-slim
+
+WORKDIR /usr/src/app
+
+RUN npm install -g serve
+
+COPY --from=build /usr/src/app/dist ./dist
+
 EXPOSE 3000
 
-# Command to run the application
-CMD ["serve", "-s", "build"]
+CMD ["serve", "-s", "dist"]

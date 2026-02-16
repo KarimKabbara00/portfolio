@@ -10,7 +10,8 @@ interface Props {
 export const Suggestion: React.FC<Props> = ({ text, handleSuggestionClick, responseComplete }) => {
   const [hovered, setHovered] = useState<boolean>(false);
   const buttonAnim = useSpring({
-    backgroundColor: hovered && responseComplete ? "#ef233c" : "transparent",
+    backgroundColor: hovered && responseComplete ? "rgba(239, 35, 60, 0.15)" : "transparent",
+    borderColor: hovered && responseComplete ? "rgba(239, 35, 60, 0.4)" : "rgba(255, 255, 255, 0.12)",
     config: config.stiff,
   });
 
@@ -22,7 +23,7 @@ export const Suggestion: React.FC<Props> = ({ text, handleSuggestionClick, respo
       style={buttonAnim}
       type="button"
       disabled={!responseComplete}
-      className="rounded-lg border-2 border-primary p-[0.15rem] px-2 text-[0.92rem] text-white disabled:cursor-not-allowed">
+      className="rounded-full border px-3 py-1 text-[0.8rem] text-white/70 transition-colors hover:text-white disabled:cursor-not-allowed disabled:opacity-40">
       {text}
     </animated.button>
   );

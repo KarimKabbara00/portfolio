@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import openAILogo from "../../assets/icons/other/openai-white-logomark.svg";
+import aiLogo from "../../assets/icons/other/sparkles.svg";
 import { useSpring, animated, config } from "@react-spring/web";
 
 interface Props {
@@ -19,9 +19,9 @@ export const AskGPTButton: React.FC<Props> = ({ setShowGPTModal }) => {
       onMouseOut={() => setHovered(false)}
       onClick={() => setShowGPTModal(true)}
       style={scale}
-      className="fixed right-0 top-0 z-50 m-4 w-8 smallScreen:w-7 xxsScreen:w-6 cursor-pointer text-white"
-      alt="askGPT"
-      src={openAILogo}
+      className="fixed right-0 top-0 z-50 m-4 w-8 cursor-pointer text-white smallScreen:w-7 xxsScreen:w-6"
+      alt="askAI"
+      src={aiLogo}
     />
   );
 };

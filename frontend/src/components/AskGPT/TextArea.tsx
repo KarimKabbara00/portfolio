@@ -53,8 +53,8 @@ export const TextArea: React.FC<Props> = ({ prompt, textAreaRef, setPrompt, setC
       onKeyDown={handleKeyDown}
       onChange={(e) => setPrompt(e.target.value)}
       value={prompt}
-      className="h-12 w-full resize-none rounded-lg border-thin border-stone-500 bg-[#1e2122] px-2 pb-[0.7rem] pt-[0.65rem] focus:outline-none"
-      placeholder="Ask ChatGPT"
+      className="h-12 w-full resize-none bg-transparent py-3 pl-4 pr-12 text-[0.95rem] text-white placeholder-white/30 focus:outline-none"
+      placeholder="Ask about Karim..."
     />
   );
 };

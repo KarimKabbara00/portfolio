@@ -18,10 +18,17 @@ interface ChatObject {
 }
 
 export const GPTModal: React.FC<Props> = ({ showGPTModal, setShowGPTModal }) => {
-  const showModal = useSpring({
+  const backdropSpring = useSpring({
     opacity: showGPTModal ? 1 : 0,
     pointerEvents: showGPTModal ? "auto" : ("none" as "auto" | "none"),
-    config: config.stiff,
+    config: { tension: 280, friction: 24 },
+  });
+
+  const modalSpring = useSpring({
+    opacity: showGPTModal ? 1 : 0,
+    transform: showGPTModal ? "translate(-50%, -50%) scale(1)" : "translate(-50%, -50%) scale(0.97)",
+    pointerEvents: showGPTModal ? "auto" : ("none" as "auto" | "none"),
+    config: { tension: 280, friction: 24 },
   });
 
   const textAreaRef = useRef<HTMLTextAreaElement>(null);
@@ -68,7 +75,7 @@ export const GPTModal: React.FC<Props> = ({ showGPTModal, setShowGPTModal }) => 
     setAwaitingResponse(true); // loading anim
 
     axios
-      .post(`${process.env.REACT_APP_BASE_URL}/api/ask-gpt`, {
+      .post(`${import.meta.env.VITE_BASE_URL}/api/ask-gpt`, {
         prompt,
       })
       .then((res) => {
@@ -106,10 +113,10 @@ export const GPTModal: React.FC<Props> = ({ showGPTModal, setShowGPTModal }) => 
 
   return (
     <>
-      {showGPTModal && <animated.div style={showModal} id="chatGPTBlur" className="fixed z-[60] h-full w-full backdrop-blur-sm"></animated.div>}
+      {showGPTModal && <animated.div style={backdropSpring} id="chatGPTBlur" className="fixed z-[60] h-full w-full backdrop-blur-md"></animated.div>}
       <animated.div
-        style={showModal}
-        className="fixed left-1/2 top-1/2 z-[70] flex h-[90%] w-[51rem] -translate-x-1/2 -translate-y-1/2 transform flex-col items-center rounded-lg border-thin border-stone-500 bg-[#101112] text-white shadow-md xsScreen:w-[40rem] contactFieldWidth:w-[30rem] portfolioTechWidth:w-[23rem] xxsScreen:w-[20rem]">
+        style={modalSpring}
+        className="fixed left-1/2 top-1/2 z-[70] flex h-[90%] w-[51rem] flex-col items-center rounded-2xl border border-white/10 bg-[#101112] text-white shadow-2xl shadow-black/50 xsScreen:w-[40rem] contactFieldWidth:w-[30rem] portfolioTechWidth:w-[23rem] xxsScreen:w-[20rem]">
         <ModalHeader setShowGPTModal={setShowGPTModal} handleSubmit={handleSubmit} prompt={prompt} setPrompt={setPrompt} responseComplete={responseComplete} />
         <Chat
           chatHistory={chatHistory}
@@ -120,9 +127,12 @@ export const GPTModal: React.FC<Props> = ({ showGPTModal, setShowGPTModal }) => 
           setInteracted={setInteracted}
           awaitingResponse={awaitingResponse}
         />
-        <form className="relative z-30 my-2 flex w-[97%] gap-x-2 bg-[#101112] portfolioTechWidth:w-[93%]" onSubmit={handleSubmit}>
+        <form
+          className="relative z-30 mx-3 mb-3 mt-2 flex w-[calc(100%-1.5rem)] items-end rounded-2xl border border-white/10 bg-[#1a1a1e] transition-colors focus-within:border-white/20 portfolioTechWidth:mx-2 portfolioTechWidth:w-[calc(100%-1rem)]"
+          onSubmit={handleSubmit}
+        >
           <TextArea textAreaRef={textAreaRef} prompt={prompt} setChatHistory={setChatHistory} setPrompt={setPrompt} submitPrompt={submitPrompt} />
-          <SendButton responseComplete={responseComplete} />
+          <SendButton responseComplete={responseComplete} prompt={prompt} />
         </form>
       </animated.div>
     </>

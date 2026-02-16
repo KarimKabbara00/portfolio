@@ -56,7 +56,7 @@ export const Chat: React.FC<Props> = ({ chatHistory, chatRef, responseComplete, 
   }, [chatRef, interacted, responseComplete]);
 
   return (
-    <div ref={chatRef} className="z-20 flex overflow-x-hidden w-full flex-grow flex-col gap-y-6 overflow-y-auto border-b-thin border-stone-500 bg-[#191c1d] px-4 py-6">
+    <div ref={chatRef} className="z-20 flex w-full flex-grow flex-col gap-y-5 overflow-x-hidden overflow-y-auto bg-white/[0.02] px-5 py-5 [scrollbar-color:rgba(255,255,255,0.08)_transparent] [scrollbar-width:thin]">
       {chatHistory.map((item, index) => (
         <TextBubble key={index} last={index === chatHistory.length - 1} text={item.text} fromGPT={item.fromGPT} setResponseComplete={setResponseComplete} awaitingResponse={awaitingResponse} />
       ))}

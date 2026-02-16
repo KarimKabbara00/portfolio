@@ -1,8 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
-import openAILogo from "../../assets/icons/other/openai-white-logomark.svg";
-import { useSpring, animated, config } from "@react-spring/web";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSpinner } from "@fortawesome/free-solid-svg-icons";
+
+import { useSpring, animated } from "@react-spring/web";
 
 interface Props {
   text: string;
@@ -13,10 +11,6 @@ interface Props {
 }
 
 export const TextBubble: React.FC<Props> = ({ text, fromGPT, setResponseComplete, awaitingResponse, last }) => {
-  const containerStyle = {
-    alignSelf: fromGPT ? "self-start" : "self-end",
-  };
-
   // ----------- GPT letter type thing. ----------- //
   const [shownText, setShownText] = useState<string>(fromGPT ? "" : text);
   const currentTextRef = useRef("");
@@ -42,28 +36,31 @@ export const TextBubble: React.FC<Props> = ({ text, fromGPT, setResponseComplete
   // ----------- GPT letter type thing. ----------- //
 
   const animateBubble = useSpring({
-    from: { opacity: 0, transform: "scale(1.3)" },
-    to: { opacity: 1, transform: "scale(1)" },
-    delay: 175,
-    config: config.gentle,
+    from: { opacity: 0, transform: "translateY(8px)" },
+    to: { opacity: 1, transform: "translateY(0px)" },
+    delay: 100,
+    config: { tension: 280, friction: 22 },
   });
 
   return (
-    <div style={containerStyle} className="relative flex w-fit gap-x-3 rounded-xl">
+    <animated.div style={animateBubble} className={`relative flex w-full ${fromGPT ? "" : "justify-end"}`}>
       {fromGPT && (
-        <>
-          <img className="mt-1 w-8 self-start contactFieldWidth:w-7 xxsScreen:w-6" src={openAILogo} alt="openAILogo"></img>
-          <div className="mr-24 h-fit text-wrap break-words rounded-xl bg-transparent leading-7 contactFieldWidth:mr-14 portfolioTechWidth:mr-6 portfolioTechWidth:w-[82.5%] xxsScreen:mr-2">
-            {shownText}
-          </div>
-          {awaitingResponse && last && <FontAwesomeIcon icon={faSpinner} className="fa-spin absolute left-11 top-2.5 self-center text-xl" />}
-        </>
+        <div className="mr-16 h-fit text-wrap break-words text-[0.95rem] leading-7 text-white/90 contactFieldWidth:mr-8 portfolioTechWidth:mr-4 xxsScreen:mr-2">
+          {shownText}
+          {awaitingResponse && last && (
+            <span className="ml-1 inline-flex items-center gap-1">
+              <span className="inline-block h-1.5 w-1.5 animate-bounce rounded-full bg-white/40 [animation-delay:0ms]" />
+              <span className="inline-block h-1.5 w-1.5 animate-bounce rounded-full bg-white/40 [animation-delay:150ms]" />
+              <span className="inline-block h-1.5 w-1.5 animate-bounce rounded-full bg-white/40 [animation-delay:300ms]" />
+            </span>
+          )}
+        </div>
       )}
       {!fromGPT && (
-        <animated.div className="h-fit text-wrap break-words rounded-xl bg-[#38383d] px-3 py-1.5 leading-7 xsScreen:text-[0.95rem]" style={animateBubble}>
+        <div className="h-fit max-w-[80%] text-wrap break-words rounded-2xl rounded-br-sm bg-white/[0.08] px-4 py-2 text-[0.95rem] leading-7">
           {shownText}
-        </animated.div>
+        </div>
       )}
-    </div>
+    </animated.div>
   );
 };
