@@ -81,7 +81,7 @@ export const AboutMe: React.FC<propTypes> = ({ aboutInView, setAboutInView }) =>
         <div className="flex w-1/2 flex-col items-center justify-center gap-y-6 midScreen:w-11/12">
           <img className="mb-2 h-60 w-60 rounded-full border-2 object-cover" src={me} alt="Karim Kabbara Portrait" />
           <div className="flex items-start justify-center gap-x-6">
-            <OtherSkill name="B.S. in Computer Science" alt="B.S. in Computer Science" icon={gradSVG} size="h-14" animate />
+            <OtherSkill name="B.S. in Computer Science" alt="B.S. in Computer Science" icon={gradSVG} size="h-14" />
             <OtherSkill
               name={
                 <>

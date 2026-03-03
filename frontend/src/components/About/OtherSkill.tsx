@@ -1,6 +1,5 @@
 import { config, useSpring, animated } from "@react-spring/web";
 import React, { useState, useMemo } from "react";
-import transcript from "../../assets/Karim_Kabbara_Transcript.pdf";
 import ccna from "../../assets/Karim_Kabbara_CCNA.pdf";
 import secPlus from "../../assets/Karim_Kabbara_SecPlus.pdf";
 
@@ -18,7 +17,6 @@ export const OtherSkill: React.FC<propTypes> = ({ icon, alt, name, animate = fal
   // Use useMemo to map alt to file
   const file = useMemo(() => {
     const fileMap: { [key: string]: string } = {
-      "B.S. in Computer Science": transcript,
       "CCNA (200-301)": ccna,
       "Security+ (SY0-601)": secPlus,
     };
