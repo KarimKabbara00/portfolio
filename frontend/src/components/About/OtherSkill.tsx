@@ -44,7 +44,7 @@ export const OtherSkill: React.FC<propTypes> = ({ icon, alt, name, animate = fal
       role={animate ? "button" : "none"}
       aria-label={alt}>
       <img className={size} src={icon} alt={alt} />
-      <span className="text-center font-mono text-sm text-white largeScreen:text-xs midScreen:text-sm">{name}</span>
+      <span className={`text-center font-mono text-sm largeScreen:text-xs midScreen:text-sm ${animate ? "text-primary underline decoration-primary/50 decoration-1 underline-offset-2 transition-colors hover:text-secondary hover:decoration-secondary" : "text-white"}`}>{name}</span>
     </animated.div>
   );
 };
