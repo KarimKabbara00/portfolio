@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useSpring, animated } from "@react-spring/web";
+import { useScrollReveal } from "../../hooks/useScrollReveal";
 import { Title } from "../shared/Title";
 import { ContactField } from "./ContactField";
 import { ContactTextArea } from "./ContactTextArea";
@@ -30,6 +31,8 @@ export const Contact: React.FC<propTypes> = ({ contactInView, setContactInView }
     return () => document.removeEventListener("scroll", checkInView);
   }, [setContactInView]);
 
+  const { ref: revealRef, style: revealStyle } = useScrollReveal(0.1);
+
   const [name, setName] = useState<string>("");
   const [subject, setSubject] = useState<string>("");
   const [content, setContent] = useState<string>("");
@@ -39,6 +42,7 @@ export const Contact: React.FC<propTypes> = ({ contactInView, setContactInView }
   const hoverAnim = useSpring({
     backgroundColor: buttonHovered ? "#ef233c" : "#141516",
     color: buttonHovered ? "#E7ECEF" : "#ef233c",
+    transform: buttonHovered ? "translateY(-2px)" : "translateY(0px)",
     config: { tension: 600, friction: 30 },
   });
 
@@ -106,32 +110,34 @@ export const Contact: React.FC<propTypes> = ({ contactInView, setContactInView }
   return (
     <div ref={targetRef} id="contact" className="z-1 relative flex min-h-dvh w-screen flex-col items-center pb-72 text-white">
       <Title title="Contact" />
-      <div className="smallScreen:mt-12 contactFieldWidthXs:w-[22rem] xxsScreen:w-72 contactFieldWidthXs:text-sm smallScreen:w-[29rem] mt-16 w-fit text-center text-base">
-        If you're interested in collaborating, feel free to contact me. I'm open to discussing any opportunities.
-      </div>
-      <form
-        onSubmit={sendMessage}
-        className="midScreen:w-[50rem] contactFieldWidth:w-[30rem] xxsScreen:w-[20rem] contactFieldWidthXs:w-[22.5rem] smallScreen:w-[40rem] relative mt-8 flex w-[55rem] flex-col items-center gap-y-5">
-        <ContactField placeholder="Name" value={name} onChange={setName} />
-        <ContactField placeholder="Subject" value={subject} onChange={setSubject} />
-        <ContactTextArea value={content} onChange={setContent} />
-        <div className="contactFieldWidth:flex-col flex items-center self-start">
-          <div className="flex items-center self-start">
-            <animated.button
-              tabIndex={-1}
-              onMouseOver={() => setButtonHovered(true)}
-              onMouseOut={() => setButtonHovered(false)}
-              type="submit"
-              style={hoverAnim}
-              className="smallScreen:text-base xsScreen:text-sm xlScreen:px-6 xlScreen:py-3 largeScreen:text-lg largeScreen:px-4 largeScreen:py-2 xlScreen:text-xl self-start rounded-sm border-2 border-primary text-lg text-primary">
-              <div>Send Message</div>
-            </animated.button>
-            {(messageSent || responseReceived || messageError) && <FontAwesomeIcon style={iconStyle} className={icon === faSpinner ? "fa-spin" : ""} icon={icon} />}
-          </div>
-          {responseReceived && <div className="contactFieldWidth:pt-4 text-[0.9rem]">Thanks for contacting me. I’ll get back to you soon!</div>}
-          {messageError && <div className="contactFieldWidth:pt-4 text-[0.9rem]">Error sending message. Please email me directly.</div>}
+      <animated.div ref={revealRef} style={revealStyle} className="flex w-full flex-col items-center">
+        <div className="smallScreen:mt-12 contactFieldWidthXs:w-[22rem] xxsScreen:w-72 contactFieldWidthXs:text-sm smallScreen:w-[29rem] mt-16 w-fit text-center text-base">
+          If you’re interested in collaborating, feel free to contact me. I’m open to discussing any opportunities.
         </div>
-      </form>
+        <form
+          onSubmit={sendMessage}
+          className="midScreen:w-[50rem] contactFieldWidth:w-[30rem] xxsScreen:w-[20rem] contactFieldWidthXs:w-[22.5rem] smallScreen:w-[40rem] relative mt-8 flex w-[55rem] flex-col items-center gap-y-5">
+          <ContactField placeholder="Name" value={name} onChange={setName} />
+          <ContactField placeholder="Subject" value={subject} onChange={setSubject} />
+          <ContactTextArea value={content} onChange={setContent} />
+          <div className="contactFieldWidth:flex-col flex items-center self-start">
+            <div className="flex items-center self-start">
+              <animated.button
+                tabIndex={-1}
+                onMouseOver={() => setButtonHovered(true)}
+                onMouseOut={() => setButtonHovered(false)}
+                type="submit"
+                style={hoverAnim}
+                className="smallScreen:text-base xsScreen:text-sm xlScreen:px-6 xlScreen:py-3 largeScreen:text-lg largeScreen:px-4 largeScreen:py-2 xlScreen:text-xl self-start rounded-sm border-2 border-primary text-lg text-primary">
+                <div>Send Message</div>
+              </animated.button>
+              {(messageSent || responseReceived || messageError) && <FontAwesomeIcon style={iconStyle} className={icon === faSpinner ? "fa-spin" : ""} icon={icon} />}
+            </div>
+            {responseReceived && <div className="contactFieldWidth:pt-4 text-[0.9rem]">Thanks for contacting me. I’ll get back to you soon!</div>}
+            {messageError && <div className="contactFieldWidth:pt-4 text-[0.9rem]">Error sending message. Please email me directly.</div>}
+          </div>
+        </form>
+      </animated.div>
       <Footer />
     </div>
   );

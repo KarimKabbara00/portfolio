@@ -1,37 +1,58 @@
 import { useSpring, animated, config } from "@react-spring/web";
 import React from "react";
 
+export type SkillCategory = "frontend" | "backend" | "google cloud";
+
 interface propType {
-  showFrontend: boolean;
-  setShowFrontend: (frontOrBack: boolean) => void;
+  active: SkillCategory;
+  setActive: (category: SkillCategory) => void;
 }
 
-export const SkillToggle: React.FC<propType> = ({ showFrontend, setShowFrontend }) => {
-  const slideBar = useSpring({
-    transform: showFrontend ? "translate(7%, 14%)" : "translate(112%, 14%)",
-    width: showFrontend ? "5.85rem" : "5.7rem",
-    config: { tension: 1000, friction: 100 },
+export const SkillToggle: React.FC<propType> = ({ active, setActive }) => {
+  const categories: SkillCategory[] = ["frontend", "backend", "google cloud"];
+  const activeIndex = categories.indexOf(active);
+
+  const slide = useSpring({
+    transform: `translateX(${activeIndex * 100}%)`,
+    config: { tension: 300, friction: 30 },
   });
 
-  const frontendOpacity = useSpring({
-    opacity: showFrontend ? 1 : 0.3,
-    config: config.default,
+  const getStyles = (category: SkillCategory) => ({
+    opacity: active === category ? 1 : 0.4,
+    color: active === category ? "#ef233c" : "#ffffff",
   });
-  const backendOpacity = useSpring({
-    opacity: showFrontend ? 0.3 : 1,
-    config: config.default,
-  });
+
+  const frontendStyles = useSpring({ ...getStyles("frontend"), config: config.default });
+  const backendStyles = useSpring({ ...getStyles("backend"), config: config.default });
+  const cloudStyles = useSpring({ ...getStyles("google cloud"), config: config.default });
 
   return (
-    <div className="relative flex select-none gap-x-3 rounded-xl border-2 border-zinc-700 bg-neutral-900 text-xl shadow-inner">
-      <animated.div className="relative z-20 cursor-pointer py-2.5 pl-2.5" onClick={() => setShowFrontend(true)} style={frontendOpacity}>
+    <div className="relative grid w-fit select-none grid-cols-3 rounded-full bg-white/[0.06] p-1 text-lg font-medium backdrop-blur-sm">
+      <animated.div
+        style={slide}
+        className="absolute inset-y-1 left-1 w-[calc(33.33%-2px)] rounded-full bg-primary/20 ring-1 ring-primary/40"
+      />
+      <animated.button
+        style={frontendStyles}
+        onClick={() => setActive("frontend")}
+        className="relative z-10 cursor-pointer rounded-full px-5 py-2 text-center"
+      >
         Frontend
-      </animated.div>
-
-      <animated.div className="relative z-20 cursor-pointer py-2.5 pr-2.5" onClick={() => setShowFrontend(false)} style={backendOpacity}>
-        <div className="relative z-20">Backend</div>
-      </animated.div>
-      <animated.div style={slideBar} className="absolute z-10 h-[79%] rounded-lg bg-zinc-800"></animated.div>
+      </animated.button>
+      <animated.button
+        style={backendStyles}
+        onClick={() => setActive("backend")}
+        className="relative z-10 cursor-pointer rounded-full px-5 py-2 text-center"
+      >
+        Backend
+      </animated.button>
+      <animated.button
+        style={cloudStyles}
+        onClick={() => setActive("google cloud")}
+        className="relative z-10 cursor-pointer rounded-full px-5 py-2 text-center"
+      >
+        Google Cloud
+      </animated.button>
     </div>
   );
 };

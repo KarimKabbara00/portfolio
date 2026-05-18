@@ -1,4 +1,6 @@
 import React, { useEffect, useRef } from "react";
+import { animated } from "@react-spring/web";
+import { useScrollReveal } from "../../hooks/useScrollReveal";
 import { Title } from "../shared/Title";
 import { PortfolioItem } from "./PortfolioItem";
 import classicalPNG from "../../assets/portfolioImages/classicalLibrary.png";
@@ -38,6 +40,8 @@ export const Portfolio: React.FC<propTypes> = ({ setPortfolioInView }) => {
     checkInView(); // check on start up in case we land on portfolio directly
     return () => document.removeEventListener("scroll", checkInView);
   }, [setPortfolioInView]);
+
+  const { ref: revealRef, style: revealStyle } = useScrollReveal(0.1);
 
   const realEContractsDescription =
     "Real eContracts is a full-stack real estate contract management platform built with Next.js, Express.js, and Google Cloud Platform. It streamlines the creation, signing, and tracking of legally binding contracts through secure workflows, dynamic PDFs, and simplified client access.";
@@ -92,12 +96,13 @@ export const Portfolio: React.FC<propTypes> = ({ setPortfolioInView }) => {
   return (
     <div ref={targetRef} id="portfolio" className="-z-1 relative min-h-dvh w-dvw px-4">
       <Title title="Portfolio" />
-      <div className="mt-12 flex flex-col gap-y-16 pb-16 pt-3 midScreen:gap-y-14 midScreen:pt-0">
+      <animated.div ref={revealRef} style={revealStyle} className="mt-12 flex flex-col gap-y-16 pb-16 pt-3 midScreen:gap-y-14 midScreen:pt-0">
         <PortfolioItem object={realEContractsObject} />
         {/* <PortfolioItem object={classicalObject} /> */}
         {/* <PortfolioItem object={netSimObj} /> */}
         {/* <PortfolioItem object={bradyObj} /> */}
-      </div>
+        <p className="text-center text-lg tracking-wide text-white/60">More coming soon...</p>
+      </animated.div>
     </div>
   );
 };

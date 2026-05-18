@@ -13,11 +13,14 @@ module.exports = {
         none: "none",
         auto: "auto",
       },
+      fontFamily: {
+        display: ['"Space Grotesk"', 'sans-serif'],
+      },
       colors: {
         bgColor: "#141516",
         white: "#E7ECEF",
         primary: "#ef233c",
-        secondary: "#EF233C",
+        secondary: "#ff6b6b",
         tertiary: "#E7ECEF",
         textPlaceholder: "#9ca3af",
       },

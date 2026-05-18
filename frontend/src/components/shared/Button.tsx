@@ -15,6 +15,7 @@ export const Button: React.FC<propTypes> = ({ icon, text, callback }) => {
   const hoverAnim = useSpring({
     backgroundColor: buttonHovered ? "#ef233c" : "transparent",
     color: buttonHovered ? "#E7ECEF" : "#ef233c",
+    transform: buttonHovered ? "translateY(-2px)" : "translateY(0px)",
     config: { tension: 600, friction: 30 },
   });
 

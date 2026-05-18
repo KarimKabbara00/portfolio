@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
 import { SkillItem } from "./SkillItem";
 import { Title } from "../shared/Title";
-import { SkillToggle } from "./SkillToggle";
+import { SkillToggle, SkillCategory } from "./SkillToggle";
 import { animated, useSpring, config } from "@react-spring/web";
+import { useScrollReveal } from "../../hooks/useScrollReveal";
 import { OtherSkill } from "./OtherSkill";
 import nextjsSVG from "../../assets/icons/skills/nextjs.svg";
 import reactSVG from "../../assets/icons/skills/react.svg";
@@ -50,26 +51,31 @@ export const AboutMe: React.FC<propTypes> = ({ aboutInView, setAboutInView }) =>
     return () => document.removeEventListener("scroll", checkInView);
   }, [setAboutInView]);
 
-  const [showFrontend, setShowFrontend] = useState<boolean>(true);
+  const { ref: revealRef, style: revealStyle } = useScrollReveal(0.1);
+
+  const [activeSkill, setActiveSkill] = useState<SkillCategory>("frontend");
+
+  const springConfig = (key: string) => {
+    if (key === "scale") return { tension: 400, friction: 45 };
+    return config.default;
+  };
 
   const animateFrontend = useSpring({
-    scale: showFrontend ? 1 : 0,
-    opacity: showFrontend ? 1 : 0,
-    config: (key) => {
-      if (key === "scale") {
-        return { tension: 400, friction: 45 };
-      } else return config.default;
-    },
+    scale: activeSkill === "frontend" ? 1 : 0,
+    opacity: activeSkill === "frontend" ? 1 : 0,
+    config: springConfig,
   });
 
   const animateBackend = useSpring({
-    scale: !showFrontend ? 1 : 0,
-    opacity: !showFrontend ? 1 : 0,
-    config: (key) => {
-      if (key === "scale") {
-        return { tension: 400, friction: 45 };
-      } else return config.default;
-    },
+    scale: activeSkill === "backend" ? 1 : 0,
+    opacity: activeSkill === "backend" ? 1 : 0,
+    config: springConfig,
+  });
+
+  const animateCloud = useSpring({
+    scale: activeSkill === "google cloud" ? 1 : 0,
+    opacity: activeSkill === "google cloud" ? 1 : 0,
+    config: springConfig,
   });
 
   const opacity = 0.7;
@@ -77,9 +83,9 @@ export const AboutMe: React.FC<propTypes> = ({ aboutInView, setAboutInView }) =>
   return (
     <div ref={targetRef} id="about" className="z-1 relative flex min-h-dvh w-dvw flex-col pb-16">
       <Title title="About" />
-      <div className="relative flex h-full midScreen:mt-10 midScreen:flex-col midScreen:items-center">
+      <animated.div ref={revealRef} style={revealStyle} className="relative flex h-full midScreen:mt-10 midScreen:flex-col midScreen:items-center">
         <div className="flex w-1/2 flex-col items-center justify-center gap-y-6 midScreen:w-11/12">
-          <img className="mb-2 h-60 w-60 rounded-full border-2 object-cover" src={me} alt="Karim Kabbara Portrait" />
+          <img className="mb-2 h-60 w-60 rounded-full border-2 border-white/20 object-cover transition-all duration-500 hover:border-primary hover:shadow-[0_0_20px_-4px_rgba(239,35,60,0.5)]" src={me} alt="Karim Kabbara Portrait" />
           <div className="flex items-start justify-center gap-x-6">
             <OtherSkill name="B.S. in Computer Science" alt="B.S. in Computer Science" icon={gradSVG} size="h-14" />
             <OtherSkill
@@ -114,56 +120,78 @@ export const AboutMe: React.FC<propTypes> = ({ aboutInView, setAboutInView }) =>
         </div>
         <div className="absolute left-1/2 top-[8%] h-[44rem] -translate-x-1/2 transform rounded-lg border-[0.1rem] border-neutral-700 largeScreen:h-[42rem] midScreen:hidden"></div>
 
-        <div className="relative flex w-1/2 flex-col">
-          <div className="absolute left-1/2 -translate-x-1/2 transform pt-20 text-4xl text-white xsScreen:pt-[5.5rem]">
-            <SkillToggle setShowFrontend={setShowFrontend} showFrontend={showFrontend} />
+        <div className="relative flex w-1/2 flex-col items-center midScreen:w-full midScreen:mt-12">
+          <div className="mb-10 pt-20 xsScreen:pt-[5.5rem]">
+            <SkillToggle active={activeSkill} setActive={setActiveSkill} />
           </div>
-          {showFrontend && (
-            <animated.div style={animateFrontend} className="mb-12 flex flex-col gap-y-8 xsScreen:gap-y-6">
-              <div className="flex justify-center gap-x-10 pt-40 xsScreen:gap-x-4">
-                <SkillItem text="Next.js" imgLink={nextjsSVG} themeColor={`rgba(68, 181, 214, ${opacity})`} />
-                <SkillItem text="React.js" imgLink={reactSVG} themeColor={`rgba(68, 181, 214, ${opacity})`} />
-              </div>
-              <div className="flex justify-center gap-x-10 xsScreen:gap-x-4">
-                <SkillItem text="Typescript" imgLink={tsSVG} themeColor={`rgba(38, 97, 185, ${opacity})`} />
-                <SkillItem text="Javascript" imgLink={jsSVG} themeColor={`rgba(234, 78, 32, ${opacity})`} />
-                <SkillItem text="CSS" imgLink={cssSVG} themeColor={`rgba(43, 153, 212, ${opacity})`} />
-              </div>
-              <div className="flex justify-center gap-x-10 xsScreen:gap-x-4">
-                <SkillItem text="React Query" imgLink={tanstackSVG} themeColor={`rgba(56, 153, 164, ${opacity})`} />
-                <SkillItem text="Tailwind" imgLink={tailSVG} themeColor={`rgba(56, 153, 164, ${opacity})`} />
-              </div>
-            </animated.div>
-          )}
 
-          {!showFrontend && (
-            <animated.div style={animateBackend} className="mb-12 flex flex-col gap-y-8 xsScreen:gap-y-6">
-              <div className="flex justify-center gap-x-10 pt-40 xsScreen:gap-x-4">
-                <SkillItem text="Express.js" imgLink={expSVG} themeColor={`rgba(255, 255, 255, ${opacity})`} />
-                <SkillItem text="Node.js" imgLink={nodejsSVG} themeColor={`rgba(9, 46, 32, ${opacity})`} />
-              </div>
-              <div className="flex justify-center gap-x-10 xsScreen:gap-x-4">
-                <SkillItem text="PostgreSQL" imgLink={psqlSVG} themeColor={`rgba(40, 83, 126, ${opacity})`} />
-                <SkillItem text="Prisma ORM" imgLink={prismaSVG} themeColor={`rgba(0, 117, 143, ${opacity})`} />
-                <SkillItem text="Firebase" imgLink={firebaseSVG} themeColor={`rgba(55, 200, 123, ${opacity})`} />
-              </div>
-              <div className="flex justify-center gap-x-10 xsScreen:gap-x-4">
-                <SkillItem text="Google Cloud Platform" imgLink={gcpSVG} gradientColor="conic-gradient(#4285F4 25%, #EA4335 25%, #EA4335 50%, #FBBC05 50%, #FBBC05 75%, #34A853 75%)" />
-                <SkillItem text="Amazon Web Services" imgLink={awsSVG} themeColor={`rgba(253, 135, 6, ${opacity})`} />
-              </div>
-            </animated.div>
-          )}
+          <div className="relative w-full min-h-[16rem]">
+            {activeSkill === "frontend" && (
+              <animated.div style={animateFrontend} className="flex flex-col gap-y-8 xsScreen:gap-y-6">
+                <div className="flex justify-center gap-x-10 xsScreen:gap-x-4">
+                  <SkillItem text="Next.js" imgLink={nextjsSVG} themeColor={`rgba(68, 181, 214, ${opacity})`} />
+                  <SkillItem text="React.js" imgLink={reactSVG} themeColor={`rgba(68, 181, 214, ${opacity})`} />
+                </div>
+                <div className="flex justify-center gap-x-10 xsScreen:gap-x-4">
+                  <SkillItem text="Typescript" imgLink={tsSVG} themeColor={`rgba(38, 97, 185, ${opacity})`} />
+                  <SkillItem text="Tailwind" imgLink={tailSVG} themeColor={`rgba(56, 153, 164, ${opacity})`} />
+                  <SkillItem text="CSS" imgLink={cssSVG} themeColor={`rgba(43, 153, 212, ${opacity})`} />
+                </div>
+                <div className="flex justify-center gap-x-10 xsScreen:gap-x-4">
+                  <SkillItem text="React Query" imgLink={tanstackSVG} themeColor={`rgba(56, 153, 164, ${opacity})`} />
+                  <SkillItem text="Zustand" imgLink={jsSVG} themeColor={`rgba(234, 78, 32, ${opacity})`} />
+                </div>
+              </animated.div>
+            )}
 
-          <div className="flex flex-col items-center gap-y-2">
-            <div className="text-white">Other Skills:</div>
+            {activeSkill === "backend" && (
+              <animated.div style={animateBackend} className="flex flex-col gap-y-8 xsScreen:gap-y-6">
+                <div className="flex justify-center gap-x-10 xsScreen:gap-x-4">
+                  <SkillItem text="Express.js" imgLink={expSVG} themeColor={`rgba(255, 255, 255, ${opacity})`} />
+                  <SkillItem text="Firebase" imgLink={firebaseSVG} themeColor={`rgba(255, 160, 0, ${opacity})`} />
+                </div>
+                <div className="flex justify-center gap-x-10 xsScreen:gap-x-4">
+                  <SkillItem text="PostgreSQL" imgLink={psqlSVG} themeColor={`rgba(40, 83, 126, ${opacity})`} />
+                  <SkillItem text="RESTful APIs" imgLink={restSVG} themeColor={`rgba(100, 200, 100, ${opacity})`} />
+                  <SkillItem text="Node.js" imgLink={nodejsSVG} themeColor={`rgba(9, 46, 32, ${opacity})`} />
+                </div>
+                <div className="flex justify-center gap-x-10 xsScreen:gap-x-4">
+                  <SkillItem text="Vercel AI SDK" imgLink={gcpSVG} themeColor={`rgba(255, 255, 255, ${opacity})`} />
+                  <SkillItem text="Prisma ORM" imgLink={prismaSVG} themeColor={`rgba(0, 117, 143, ${opacity})`} />
+                </div>
+              </animated.div>
+            )}
+
+            {activeSkill === "google cloud" && (
+              <animated.div style={animateCloud} className="flex flex-col gap-y-8 xsScreen:gap-y-6">
+                <div className="flex justify-center gap-x-10 xsScreen:gap-x-4">
+                  <SkillItem text="Docker" imgLink={gcpSVG} themeColor={`rgba(36, 150, 237, ${opacity})`} />
+                  <SkillItem text="Cloud Tasks" imgLink={gcpSVG} gradientColor="conic-gradient(#4285F4 25%, #EA4335 25%, #EA4335 50%, #FBBC05 50%, #FBBC05 75%, #34A853 75%)" />
+                </div>
+                <div className="flex justify-center gap-x-10 xsScreen:gap-x-4">
+                  <SkillItem text="Cloud Run" imgLink={gcpSVG} gradientColor="conic-gradient(#4285F4 25%, #EA4335 25%, #EA4335 50%, #FBBC05 50%, #FBBC05 75%, #34A853 75%)" />
+                  <SkillItem text="Secret Manager" imgLink={gcpSVG} gradientColor="conic-gradient(#4285F4 25%, #EA4335 25%, #EA4335 50%, #FBBC05 50%, #FBBC05 75%, #34A853 75%)" />
+                  <SkillItem text="BigQuery" imgLink={gcpSVG} gradientColor="conic-gradient(#4285F4 25%, #EA4335 25%, #EA4335 50%, #FBBC05 50%, #FBBC05 75%, #34A853 75%)" />
+                </div>
+                <div className="flex justify-center gap-x-10 xsScreen:gap-x-4">
+                  <SkillItem text="Gemini" imgLink={gcpSVG} themeColor={`rgba(66, 133, 244, ${opacity})`} />
+                  <SkillItem text="Cloud Storage" imgLink={gcpSVG} gradientColor="conic-gradient(#4285F4 25%, #EA4335 25%, #EA4335 50%, #FBBC05 50%, #FBBC05 75%, #34A853 75%)" />
+                </div>
+              </animated.div>
+            )}
+          </div>
+
+          <div className="mt-10 flex flex-col items-center gap-y-2">
+            <div className="text-sm uppercase tracking-widest text-white/50">Other Skills</div>
             <div className="flex w-full items-start justify-center gap-x-3 self-center text-white">
-              <OtherSkill name="RESTful APIs" alt="RESTful APIs" icon={restSVG} />
               <OtherSkill name="Git" alt="Git" icon={gitSVG} />
               <OtherSkill name="Python" alt="Python" icon={pySVG} />
+              <OtherSkill name="AWS" alt="AWS" icon={awsSVG} />
+              <OtherSkill name="Vitest" alt="Vitest" icon={restSVG} />
             </div>
           </div>
         </div>
-      </div>
+      </animated.div>
     </div>
   );
 };

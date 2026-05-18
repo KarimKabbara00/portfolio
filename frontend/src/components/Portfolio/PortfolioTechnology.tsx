@@ -2,15 +2,12 @@ import React from "react";
 
 interface propType {
   tech: string;
-  slash: boolean;
 }
 
-export const PortfolioTechnology: React.FC<propType> = ({ tech, slash }) => {
-  const nbSpace = "\u00A0";
+export const PortfolioTechnology: React.FC<propType> = ({ tech }) => {
   return (
-    <span className="xsScreen:text-lg midScreen:text-xl largeScreen:text-xl font-mono text-2xl text-primary">
+    <span className="rounded-full bg-primary/15 px-3 py-1 font-mono text-sm text-primary ring-1 ring-primary/30">
       {tech}
-      {slash ? " |" + nbSpace : ""}
     </span>
   );
 };

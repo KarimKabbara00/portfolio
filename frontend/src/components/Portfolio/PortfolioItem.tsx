@@ -16,19 +16,19 @@ export const PortfolioItem: React.FC<Props> = ({ object }) => {
 
   return (
     <div className="mt-4 grid w-fit grid-cols-2 gap-12 pl-10 midScreen:grid-cols-1 midScreen:gap-5 midScreen:pl-0">
-      {isMidScreen && <div className="relative z-20 self-start text-4xl text-white xsScreen:text-[2rem]">{object.title}</div>}
+      {isMidScreen && <div className="relative z-20 self-start font-display font-semibold text-4xl text-white xsScreen:text-[2rem]">{object.title}</div>}
       <img className="h-full w-full border-2 border-primary object-cover shadow-portfolioImage" src={object.image} alt={object.title} />
       <div className="mx-2 flex w-11/12 flex-col items-center text-white midScreen:mx-0">
         {!isMidScreen && (
           <div className="relative w-fit self-start">
-            <div className="relative z-20 pb-4 text-4xl">{object.title}</div>
+            <div className="relative z-20 pb-4 font-display font-semibold text-4xl">{object.title}</div>
           </div>
         )}
         <div className="flex self-start pb-3">
-          <div className="flex w-[45rem] flex-wrap items-center portfolioTechWidth:w-[26rem] portfolioTechWidthXs:w-[24rem]">
-            <div className="mr-4 text-xl text-white xsScreen:mr-2 xsScreen:text-lg">Made&nbsp;with:</div>
-            {object.tech.map((tech, key, object) => (
-              <PortfolioTechnology tech={tech} key={key} slash={object.length - 1 !== key} />
+          <div className="flex w-[45rem] flex-wrap items-center gap-2 portfolioTechWidth:w-[26rem] portfolioTechWidthXs:w-[24rem]">
+            <div className="mr-2 text-xl text-white xsScreen:mr-1 xsScreen:text-lg">Made&nbsp;with:</div>
+            {object.tech.map((tech, key) => (
+              <PortfolioTechnology tech={tech} key={key} />
             ))}
           </div>
         </div>

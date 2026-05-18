@@ -34,6 +34,7 @@ export const LandingSection: React.FC<propTypes> = ({ landingInView, setLandingI
   const hoverAnim = useSpring({
     backgroundColor: buttonHovered ? "#ef233c" : "#141516",
     color: buttonHovered ? "#E7ECEF" : "#ef233c",
+    transform: buttonHovered ? "translateY(-2px)" : "translateY(0px)",
     config: { tension: 600, friction: 30 },
   });
 
@@ -59,9 +60,9 @@ export const LandingSection: React.FC<propTypes> = ({ landingInView, setLandingI
       id="home"
       className="z-1 smallScreen:gap-y-3 xlScreen:gap-y-5 relative flex h-dvh w-dvw flex-col items-center justify-center border-red-600 text-white">
       <Info />
-      <div className="xlScreen:text-5xl xsScreen:w-11/12 xxsScreen:text-xl largeScreen:text-4xl smallScreen:text-3xl xsScreen:text-2xl ml-auto mr-auto flex w-1/2 flex-col items-center justify-center">
+      <div className="xlScreen:text-5xl xsScreen:w-11/12 xxsScreen:text-xl largeScreen:text-4xl smallScreen:text-3xl xsScreen:text-2xl ml-auto mr-auto flex w-1/2 flex-col items-center justify-center font-display font-semibold">
         <div className="xlScreen:mb-3 smallScreen:mb-1">
-          Hello, I am <span className="text-primary">Karim</span>.
+          Hello, I am <span className="bg-gradient-to-r from-primary to-[#ff6b6b] bg-clip-text text-transparent">Karim</span>.
         </div>
         <TextAutoType />
       </div>

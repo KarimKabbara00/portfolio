@@ -57,8 +57,8 @@ export const SkillItem: React.FC<skillItemProps> = ({ text, imgLink, themeColor,
       style={lift}
       onMouseMove={blob}
       onMouseOut={() => setHovered(false)}
-      className="relative h-32 w-36 overflow-hidden rounded-lg bg-gradient-to-r from-primary via-primary to-secondary p-1 largeScreen:h-28 largeScreen:w-32 xsScreen:h-24 xsScreen:w-[6.5rem] xsScreen:min-w-[6.8rem]">
-      <div ref={ref} className="flex h-full w-full flex-col items-center justify-center gap-y-2 rounded-lg bg-bgColor xsScreen:gap-y-1">
+      className="relative h-32 w-36 overflow-hidden rounded-xl border border-white/10 bg-white/[0.04] p-1 backdrop-blur-md largeScreen:h-28 largeScreen:w-32 xsScreen:h-24 xsScreen:w-[6.5rem] xsScreen:min-w-[6.8rem]">
+      <div ref={ref} className="flex h-full w-full flex-col items-center justify-center gap-y-2 rounded-xl xsScreen:gap-y-1">
         <img className="z-20 w-16 rounded-lg largeScreen:w-14 xsScreen:w-10" src={imgLink} alt={text} />
         <animated.div
           style={gradientColor ? gradientStyles : themeColorStyles}
