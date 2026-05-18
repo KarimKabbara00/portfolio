@@ -19,7 +19,7 @@ export const AskGPTButton: React.FC<Props> = ({ setShowGPTModal }) => {
       onMouseOut={() => setHovered(false)}
       onClick={() => setShowGPTModal(true)}
       style={scale}
-      className="fixed right-0 top-0 z-50 m-4 w-8 cursor-pointer text-white smallScreen:w-7 xxsScreen:w-6"
+      className="fixed right-4 top-3 z-[55] w-8 cursor-pointer text-white smallScreen:top-[14px] smallScreen:w-7 xxsScreen:top-4 xxsScreen:w-6"
       alt="askAI"
       src={aiLogo}
     />

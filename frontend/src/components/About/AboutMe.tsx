@@ -11,15 +11,23 @@ import tsSVG from "../../assets/icons/skills/ts.svg";
 import expSVG from "../../assets/icons/skills/express.svg";
 import tanstackSVG from "../../assets/icons/skills/tanstack.svg";
 import tailSVG from "../../assets/icons/skills/tailwind.svg";
-import jsSVG from "../../assets/icons/skills/js.svg";
 import cssSVG from "../../assets/icons/skills/css.svg";
 import psqlSVG from "../../assets/icons/skills/psql.svg";
 import firebaseSVG from "../../assets/icons/skills/firebase.svg";
 import pySVG from "../../assets/icons/skills/py.svg";
 import restSVG from "../../assets/icons/skills/rest.svg";
 import nodejsSVG from "../../assets/icons/skills/nodejs.svg";
-import gcpSVG from "../../assets/icons/skills/gcp.svg";
-import awsSVG from "../../assets/icons/skills/aws.svg";
+import vercelSVG from "../../assets/icons/skills/vercel.svg";
+import bigquerySVG from "../../assets/icons/skills/bigquery.svg";
+import cloudRunSVG from "../../assets/icons/skills/cloudrun.svg";
+import cloudTasksSVG from "../../assets/icons/skills/cloudtasks.svg";
+import secretManagerSVG from "../../assets/icons/skills/secretmanager.svg";
+import geminiSVG from "../../assets/icons/skills/gemini.svg";
+import zustandSVG from "../../assets/icons/skills/zustand.svg";
+import dockerSVG from "../../assets/icons/skills/docker.png";
+import vitestSVG from "../../assets/icons/skills/vitest.svg";
+import cloudSqlSVG from "../../assets/icons/skills/cloudsql.svg";
+import cloudStorageSVG from "../../assets/icons/skills/cloudstorage.svg";
 import prismaSVG from "../../assets/icons/skills/prisma.svg";
 import gitSVG from "../../assets/icons/skills/git.svg";
 import gradSVG from "../../assets/icons/skills/grad.svg";
@@ -139,7 +147,7 @@ export const AboutMe: React.FC<propTypes> = ({ aboutInView, setAboutInView }) =>
                 </div>
                 <div className="flex justify-center gap-x-10 xsScreen:gap-x-4">
                   <SkillItem text="React Query" imgLink={tanstackSVG} themeColor={`rgba(56, 153, 164, ${opacity})`} />
-                  <SkillItem text="Zustand" imgLink={jsSVG} themeColor={`rgba(234, 78, 32, ${opacity})`} />
+                  <SkillItem text="Zustand" imgLink={zustandSVG} themeColor={`rgba(234, 78, 32, ${opacity})`} />
                 </div>
               </animated.div>
             )}
@@ -156,7 +164,7 @@ export const AboutMe: React.FC<propTypes> = ({ aboutInView, setAboutInView }) =>
                   <SkillItem text="Node.js" imgLink={nodejsSVG} themeColor={`rgba(9, 46, 32, ${opacity})`} />
                 </div>
                 <div className="flex justify-center gap-x-10 xsScreen:gap-x-4">
-                  <SkillItem text="Vercel AI SDK" imgLink={gcpSVG} themeColor={`rgba(255, 255, 255, ${opacity})`} />
+                  <SkillItem text="Vercel AI SDK" imgLink={vercelSVG} themeColor={`rgba(255, 255, 255, ${opacity})`} />
                   <SkillItem text="Prisma ORM" imgLink={prismaSVG} themeColor={`rgba(0, 117, 143, ${opacity})`} />
                 </div>
               </animated.div>
@@ -165,29 +173,29 @@ export const AboutMe: React.FC<propTypes> = ({ aboutInView, setAboutInView }) =>
             {activeSkill === "google cloud" && (
               <animated.div style={animateCloud} className="flex flex-col gap-y-8 xsScreen:gap-y-6">
                 <div className="flex justify-center gap-x-10 xsScreen:gap-x-4">
-                  <SkillItem text="Docker" imgLink={gcpSVG} themeColor={`rgba(36, 150, 237, ${opacity})`} />
-                  <SkillItem text="Cloud Tasks" imgLink={gcpSVG} gradientColor="conic-gradient(#4285F4 25%, #EA4335 25%, #EA4335 50%, #FBBC05 50%, #FBBC05 75%, #34A853 75%)" />
+                  <SkillItem text="Cloud Run" imgLink={cloudRunSVG} gradientColor="conic-gradient(#4285F4 25%, #EA4335 25%, #EA4335 50%, #FBBC05 50%, #FBBC05 75%, #34A853 75%)" />
+                  <SkillItem text="Cloud Tasks" imgLink={cloudTasksSVG} gradientColor="conic-gradient(#4285F4 25%, #EA4335 25%, #EA4335 50%, #FBBC05 50%, #FBBC05 75%, #34A853 75%)" />
                 </div>
                 <div className="flex justify-center gap-x-10 xsScreen:gap-x-4">
-                  <SkillItem text="Cloud Run" imgLink={gcpSVG} gradientColor="conic-gradient(#4285F4 25%, #EA4335 25%, #EA4335 50%, #FBBC05 50%, #FBBC05 75%, #34A853 75%)" />
-                  <SkillItem text="Secret Manager" imgLink={gcpSVG} gradientColor="conic-gradient(#4285F4 25%, #EA4335 25%, #EA4335 50%, #FBBC05 50%, #FBBC05 75%, #34A853 75%)" />
-                  <SkillItem text="BigQuery" imgLink={gcpSVG} gradientColor="conic-gradient(#4285F4 25%, #EA4335 25%, #EA4335 50%, #FBBC05 50%, #FBBC05 75%, #34A853 75%)" />
+                  <SkillItem text="Cloud SQL" imgLink={cloudSqlSVG} gradientColor="conic-gradient(#4285F4 25%, #EA4335 25%, #EA4335 50%, #FBBC05 50%, #FBBC05 75%, #34A853 75%)" />
+                  <SkillItem text="Cloud Storage" imgLink={cloudStorageSVG} gradientColor="conic-gradient(#4285F4 25%, #EA4335 25%, #EA4335 50%, #FBBC05 50%, #FBBC05 75%, #34A853 75%)" />
+                  <SkillItem text="BigQuery" imgLink={bigquerySVG} gradientColor="conic-gradient(#4285F4 25%, #EA4335 25%, #EA4335 50%, #FBBC05 50%, #FBBC05 75%, #34A853 75%)" />
                 </div>
                 <div className="flex justify-center gap-x-10 xsScreen:gap-x-4">
-                  <SkillItem text="Gemini" imgLink={gcpSVG} themeColor={`rgba(66, 133, 244, ${opacity})`} />
-                  <SkillItem text="Cloud Storage" imgLink={gcpSVG} gradientColor="conic-gradient(#4285F4 25%, #EA4335 25%, #EA4335 50%, #FBBC05 50%, #FBBC05 75%, #34A853 75%)" />
+                  <SkillItem text="Secret Manager" imgLink={secretManagerSVG} gradientColor="conic-gradient(#4285F4 25%, #EA4335 25%, #EA4335 50%, #FBBC05 50%, #FBBC05 75%, #34A853 75%)" />
+                  <SkillItem text="Gemini" imgLink={geminiSVG} gradientColor="conic-gradient(#4285F4 25%, #EA4335 25%, #EA4335 50%, #FBBC05 50%, #FBBC05 75%, #34A853 75%)" />
                 </div>
               </animated.div>
             )}
           </div>
 
-          <div className="mt-10 flex flex-col items-center gap-y-2">
+          <div className="mt-10 flex flex-col items-center gap-y-4">
             <div className="text-sm uppercase tracking-widest text-white/50">Other Skills</div>
-            <div className="flex w-full items-start justify-center gap-x-3 self-center text-white">
+            <div className="flex w-full items-start justify-center gap-x-3 self-center text-white xxsScreen:gap-x-px">
               <OtherSkill name="Git" alt="Git" icon={gitSVG} />
               <OtherSkill name="Python" alt="Python" icon={pySVG} />
-              <OtherSkill name="AWS" alt="AWS" icon={awsSVG} />
-              <OtherSkill name="Vitest" alt="Vitest" icon={restSVG} />
+              <OtherSkill name="Docker" alt="Docker" icon={dockerSVG} />
+              <OtherSkill name="Vitest" alt="Vitest" icon={vitestSVG} />
             </div>
           </div>
         </div>

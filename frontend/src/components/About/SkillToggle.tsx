@@ -27,7 +27,7 @@ export const SkillToggle: React.FC<propType> = ({ active, setActive }) => {
   const cloudStyles = useSpring({ ...getStyles("google cloud"), config: config.default });
 
   return (
-    <div className="relative grid w-fit select-none grid-cols-3 rounded-full bg-white/[0.06] p-1 text-lg font-medium backdrop-blur-sm">
+    <div className="relative grid w-fit select-none grid-cols-3 rounded-full bg-white/[0.06] p-1 text-lg font-medium backdrop-blur-sm contactFieldWidth:text-base">
       <animated.div
         style={slide}
         className="absolute inset-y-1 left-1 w-[calc(33.33%-2px)] rounded-full bg-primary/20 ring-1 ring-primary/40"
@@ -35,21 +35,21 @@ export const SkillToggle: React.FC<propType> = ({ active, setActive }) => {
       <animated.button
         style={frontendStyles}
         onClick={() => setActive("frontend")}
-        className="relative z-10 cursor-pointer rounded-full px-5 py-2 text-center"
+        className="relative z-10 cursor-pointer rounded-full px-5 py-2 text-center contactFieldWidth:px-3 contactFieldWidth:py-1.5 contactFieldWidth:text-base xxsScreen:px-2"
       >
         Frontend
       </animated.button>
       <animated.button
         style={backendStyles}
         onClick={() => setActive("backend")}
-        className="relative z-10 cursor-pointer rounded-full px-5 py-2 text-center"
+        className="relative z-10 cursor-pointer rounded-full px-5 py-2 text-center contactFieldWidth:px-3 contactFieldWidth:py-1.5 contactFieldWidth:text-base xxsScreen:px-2"
       >
         Backend
       </animated.button>
       <animated.button
         style={cloudStyles}
         onClick={() => setActive("google cloud")}
-        className="relative z-10 cursor-pointer rounded-full px-5 py-2 text-center"
+        className="relative z-10 cursor-pointer rounded-full px-5 py-2 text-center contactFieldWidth:px-3 contactFieldWidth:py-1.5 contactFieldWidth:text-base xxsScreen:px-2"
       >
         Google Cloud
       </animated.button>
